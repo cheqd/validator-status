@@ -25,13 +25,22 @@ export type ValidatorDescriptions = {
     moniker: string;
 }
 
-export type ValidatorCondition = {
-    condition?: number;
+export type ValidatorInfo = {
+    operatorAddress: string;
 }
 
 export type Validator = {
     validatorStatuses: ValidatorStatuses;
     validatorSigningInfos: ValidatorSigningInfos;
     validatorDescriptions: ValidatorDescriptions;
+    validatorInfo: ValidatorInfo;
     validatorCondition?: number;
+}
+
+export type ValidatorModified = {
+    operatorAddress: string;
+    status: number;
+    condition: number;
+    jailed?: boolean;
+    moniker?: string;
 }

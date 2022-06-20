@@ -20,16 +20,14 @@ workers_dev = true
 usage_model = "bundled"
 
 # Route to publish the Worker
-# route = "validators.cheqd.io/*"
+route = "validator-status.cheqd.net/*"
 
 
 # Map of environment variables to set when deploying the Worker
 # Not inherited. @default `{}`
 [vars]
 # GraphQL API endpoint for target network. Must be sourced from a BigDipper instance.
-# GRAPHQL_API = "https://explorer-gql.cheqd.io/v1/graphql" # mainnet
-GRAPHQL_API = "http://104.248.156.21:8080/v1/graphql" # testnet
-
+GRAPHQL_API = "https://explorer-gql.cheqd.io/v1/graphql" # mainnet
 
 # KV Namespaces accessible from the Worker
 # Details: https://developers.cloudflare.com/workers/learning/how-kv-works
