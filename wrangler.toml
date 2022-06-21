@@ -1,0 +1,74 @@
+# Worker name
+name = "cheqd-validator-status"
+
+# Entrypoint/path to the file that will be executed
+main = "src/index.ts"
+
+# Cloudflare Account ID
+account_id = "99b9572de9d3c33774965949416b82c9"
+
+# Date in yyyy-mm-dd to determine which version of Workers runtime to use
+# Details: https://developers.cloudflare.com/workers/platform/compatibility-dates/ 
+compatibility_date = "2022-05-24"
+
+# Deploy to NAME.SUBDOMAIN.workers.dev for testing?
+# @default `true`
+workers_dev = true
+
+# Usage model for the Worker
+# Details: https://developers.cloudflare.com/workers/platform/limits
+usage_model = "bundled"
+
+# Route to publish the Worker
+route = "validator-status.cheqd.net/*"
+
+
+# Map of environment variables to set when deploying the Worker
+# Not inherited. @default `{}`
+[vars]
+# GraphQL API endpoint for target network. Must be sourced from a BigDipper instance.
+GRAPHQL_API = "https://explorer-gql.cheqd.io/v1/graphql" # mainnet
+
+# KV Namespaces accessible from the Worker
+# Details: https://developers.cloudflare.com/workers/learning/how-kv-works
+# @default `[]`
+
+
+
+# Optional custom build step when using Wrangler CLI for build
+# Details: https://developers.cloudflare.com/workers/wrangler/custom-builds/
+# @default {}
+# [build]
+#   # Custom build command. On Linux and macOS, the command is executed in the `sh` shell and the `cmd` shell for Windows.
+#   # The `&&` and `||` shell operators may be used.
+#   command = ""
+#   # The directory in which the command is executed.
+#   cwd = "./src"
+#   # The directory to watch for changes while using `wrangler dev`, defaults to the current working directory
+#   watch_dir = ""
+
+
+# Configuration options for local development via Wrangler
+[dev]
+  # IP address for the local dev server to listen on
+  # @default `localhost`
+  ip = "localhost"
+  # Port for the local dev server to listen on
+  # @default `3000`
+  port = 8787
+  # Protocol that local wrangler dev server listens to requests on
+  # @default `http`
+  local_protocol = "http"
+
+
+# List of data files that the Worker should be bound to. This is
+# the legacy way of binding to a data file. ES module Workers should
+# do proper module imports.
+#[data_blobs]
+# DATA = ""
+
+# Minify before uploading?
+#minify = "false"
+
+# Add polyfills for node builtin modules and globals?
+#node_compat = "false"
