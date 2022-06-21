@@ -42,5 +42,5 @@ export type ValidatorModified = {
     status: number;
     condition: number;
     jailed?: boolean;
-    moniker?: string;
+    moniker: string;
 }
