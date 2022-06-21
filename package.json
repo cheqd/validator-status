@@ -1,6 +1,6 @@
 {
-  "name": "data-api",
-  "version": "v1.22.19",
+  "name": "validator-status",
+  "version": "v1.0.0",
   "main": "src/index.ts",
   "devDependencies": {
     "@cloudflare/workers-types": "^3.11.0",
