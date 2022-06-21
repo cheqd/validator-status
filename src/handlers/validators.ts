@@ -12,15 +12,9 @@ export async function handler(request: Request): Promise<Response> {
     let validators_modified: ValidatorModified[] = [];
 
     for (var i = 0; i < validators.length; i++) {
-        if (Object.keys(validators[i].validatorSigningInfos).length !== 0) {
+        if ((Object.keys(validators[i].validatorSigningInfos).length !== 0) && (Object.keys(validators[i].validatorStatuses).length !== 0)) {
             missed_blocks_counter = validators[i].validatorSigningInfos[0].missedBlocksCounter;
-        } else {
-            continue;
-        }
-
-        validators[i].validatorCondition = (1 - (missed_blocks_counter / signed_blocks_window)) * 100;
-
-        if (Object.keys(validators[i].validatorStatuses).length !== 0) {
+            validators[i].validatorCondition = (1 - (missed_blocks_counter / signed_blocks_window)) * 100;
             validators_modified.push({
                 operatorAddress: validators[i].validatorInfo.operatorAddress,
                 jailed: validators[i].validatorStatuses[0].jailed,
