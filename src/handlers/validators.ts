@@ -13,21 +13,14 @@ export async function handler(request: Request): Promise<Response> {
 
     for (var i = 0; i < validators.length; i++) {
         if (Object.keys(validators[i].validatorSigningInfos).length === 0) {
-            missed_blocks_counter = 999;
+            continue;
         } else {
             missed_blocks_counter = validators[i].validatorSigningInfos[0].missedBlocksCounter;
         }
 
         validators[i].validatorCondition = (1 - (missed_blocks_counter / signed_blocks_window)) * 100;
 
-        if (Object.keys(validators[i].validatorStatuses).length === 0) {
-            validators_modified.push({
-                operatorAddress: 'unknown',
-                status: 0,
-                moniker: 'unknown',
-                condition: validators[i].validatorCondition ?? 0,
-            });
-        } else {
+        if (Object.keys(validators[i].validatorStatuses).length !== 0) {
             validators_modified.push({
                 operatorAddress: validators[i].validatorInfo.operatorAddress,
                 jailed: validators[i].validatorStatuses[0].jailed,
@@ -35,11 +28,12 @@ export async function handler(request: Request): Promise<Response> {
                 moniker: validators[i].validatorDescriptions[0].moniker,
                 condition: validators[i].validatorCondition,
             });
+        } else {
+            continue;
         }
 
         validators_modified.sort((a,b) => (a.operatorAddress > b.operatorAddress) ? 1 : ((b.operatorAddress > a.operatorAddress) ? -1 : 0));
 
-        // console.log(validators_modified)
     }
 
     return new Response(JSON.stringify(validators_modified));
