@@ -66,7 +66,7 @@ GRAPHQL_API = "https://explorer-gql.cheqd.io/v1/graphql"
 
 [env.staging]
 # Worker name - Staging Environment
-name = "data-api-staging"
+name = "validator-status-staging"
 
 # Deploy to NAME.SUBDOMAIN.workers.dev?
 # @default `true`
