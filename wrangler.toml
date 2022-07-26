@@ -1,52 +1,52 @@
+###############################################################
+###           SECTION 1: General Configuration              ###
+###############################################################
+
 # Worker name
-name = "cheqd-validator-status"
+name = "validator-status"
 
 # Entrypoint/path to the file that will be executed
 main = "src/index.ts"
 
 # Cloudflare Account ID
-account_id = "99b9572de9d3c33774965949416b82c9"
+account_id = ""
 
 # Date in yyyy-mm-dd to determine which version of Workers runtime to use
 # Details: https://developers.cloudflare.com/workers/platform/compatibility-dates/ 
 compatibility_date = "2022-05-24"
 
-# Deploy to NAME.SUBDOMAIN.workers.dev for testing?
-# @default `true`
-workers_dev = true
-
 # Usage model for the Worker
 # Details: https://developers.cloudflare.com/workers/platform/limits
 usage_model = "bundled"
 
-# Route to publish the Worker
-route = "validator-status.cheqd.net/*"
+###############################################################
+###            SECTION 2: Production Environment            ###
+###############################################################
 
+# Deploy to NAME.SUBDOMAIN.workers.dev for testing?
+# @default `true`
+workers_dev = true
+
+# Route to publish the Worker
+route = {pattern = "validator-status.cheqd.net/*", zone_id = "88e06eefedbbd140a12ac3dd1b21a7af"}
 
 # Map of environment variables to set when deploying the Worker
 # Not inherited. @default `{}`
 [vars]
+# Environment for Worker target
+ENVIRONMENT = "production"
 # GraphQL API endpoint for target network. Must be sourced from a BigDipper instance.
-GRAPHQL_API = "https://explorer-gql.cheqd.io/v1/graphql" # mainnet
+GRAPHQL_API = "https://explorer-gql.cheqd.io/v1/graphql"
 
 # KV Namespaces accessible from the Worker
 # Details: https://developers.cloudflare.com/workers/learning/how-kv-works
 # @default `[]`
+# kv_namespaces = []
 
 
-
-# Optional custom build step when using Wrangler CLI for build
-# Details: https://developers.cloudflare.com/workers/wrangler/custom-builds/
-# @default {}
-# [build]
-#   # Custom build command. On Linux and macOS, the command is executed in the `sh` shell and the `cmd` shell for Windows.
-#   # The `&&` and `||` shell operators may be used.
-#   command = ""
-#   # The directory in which the command is executed.
-#   cwd = "./src"
-#   # The directory to watch for changes while using `wrangler dev`, defaults to the current working directory
-#   watch_dir = ""
-
+###############################################################
+###             SECTION 3: Local Development                ###
+###############################################################
 
 # Configuration options for local development via Wrangler
 [dev]
@@ -60,6 +60,49 @@ GRAPHQL_API = "https://explorer-gql.cheqd.io/v1/graphql" # mainnet
   # @default `http`
   local_protocol = "http"
 
+###############################################################
+###             SECTION 4: Staging Environment              ###
+###############################################################
+
+[env.staging]
+# Worker name - Staging Environment
+name = "validator-status-staging"
+
+# Deploy to NAME.SUBDOMAIN.workers.dev?
+# @default `true`
+workers_dev = true
+
+# Route to publish the Worker
+route = {pattern = "validator-status-staging.cheqd.net/*", zone_id = "88e06eefedbbd140a12ac3dd1b21a7af"}
+
+# Map of environment variables to set when deploying the Worker
+# Not inherited. @default `{}`
+vars = { ENVIRONMENT = "staging", GRAPHQL_API = "https://explorer-gql.cheqd.io/v1/graphql" }
+
+# KV Namespaces accessible from the Worker
+# Details: https://developers.cloudflare.com/workers/learning/how-kv-works
+# @default `[]`
+# kv_namespaces = []
+
+
+###############################################################
+###               OPTIONAL: Build Configuration             ###
+###############################################################
+
+# NOTE: THIS IS A TOP-LEVEL CONFIGURATION AND NEEDS TO BE MOVED IF USED
+# Optional custom build step when using Wrangler CLI for build
+# Details: https://developers.cloudflare.com/workers/wrangler/custom-builds/
+# @default {}
+# [build]
+#   # Custom build command. On Linux and macOS, the command is executed in 
+#   # the `sh` shell and the `cmd` shell for Windows.
+#   # The `&&` and `||` shell operators may be used.
+#   command = ""
+#   # The directory in which the command is executed.
+#   cwd = "./src"
+#   # The directory to watch for changes while using `wrangler dev`, 
+#   # defaults to the current working directory
+#   watch_dir = ""
 
 # List of data files that the Worker should be bound to. This is
 # the legacy way of binding to a data file. ES module Workers should
@@ -68,7 +111,7 @@ GRAPHQL_API = "https://explorer-gql.cheqd.io/v1/graphql" # mainnet
 # DATA = ""
 
 # Minify before uploading?
-#minify = "false"
+# minify = "false"
 
 # Add polyfills for node builtin modules and globals?
-#node_compat = "false"
+# node_compat = "false"

@@ -1,0 +1,17 @@
+name: "Workflow Dispatch"
+on: push
+concurrency: 
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  
+  call-lint:
+    name: "Lint"
+    uses: ./.github/workflows/lint.yml
+
+  call-deploy:
+    name: "Deploy"
+    needs: call-lint
+    uses: ./.github/workflows/deploy.yml
+    secrets: inherit
