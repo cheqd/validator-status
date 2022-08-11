@@ -1,5 +1,7 @@
 # Cosmos SDK: Validator Status Alerts API
 
+[![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/cheqd/validator-status/Workflow%20Dispatch/main?label=workflows&style=flat-square)](https://github.com/cheqd/validator-status/actions/workflows/dispatch.yml) [![GitHub contributors](https://img.shields.io/github/contributors/cheqd/validator-status?style=flat-square)](https://github.com/cheqd/validator-status/graphs/contributors) ![GitHub repo size](https://img.shields.io/github/repo-size/cheqd/validator-status?style=flat-square)
+
 ## ℹ️ Overview
 
 Most validator status reporting software in [Cosmos SDK](https://cosmos.network/) is designed to be run *directly* by a node operator to monitor their own nodes. This typically pulls data from [the Tendermint Prometheus metrics sink](https://docs.tendermint.com/master/nodes/metrics.html) exposed on a node.
