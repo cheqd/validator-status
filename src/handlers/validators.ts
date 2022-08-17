@@ -10,6 +10,7 @@ export async function handler(request: Request): Promise<Response> {
     let slashing_params = await bd_api.get_slashing_params();
     let signed_blocks_window = slashing_params[0].params.signed_blocks_window;
     let validators_modified: ValidatorModified[] = [];
+    let missed_blocks_counter = 0;
 
     for (var i = 0; i < validators.length; i++) {
         if ((Object.keys(validators[i].validatorSigningInfos).length !== 0) && (Object.keys(validators[i].validatorStatuses).length !== 0)) {
