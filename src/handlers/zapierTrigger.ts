@@ -1,21 +1,16 @@
 import { fetchStatuses } from './validators';
-import axios from "axios";
+import ky from "ky";
 
 export function zapierTrigger(event: Event) {
     (async () => {
-        const callZapierWebhook = async () => {
-            const statuses = fetchStatuses();
-            
-            try {
-                const res = await axios.post(ZAPIER_WEBHOOK_URL, statuses);
+        const statuses = fetchStatuses();
 
-                console.log(`Status: ${res.status}`);
-                console.log('Body: ', res.data);
-            } catch (err) {
-                console.error(err);
-            }
-        };
+        try {
+            const res = await ky.post(ZAPIER_WEBHOOK_URL, { json: statuses }).json;
 
-        await callZapierWebhook();
+            console.log('Res: ', res);
+        } catch (err) {
+            console.error(err);
+        }
     })()
 }
