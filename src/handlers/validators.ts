@@ -6,8 +6,8 @@ import { ValidatorModified } from "../types/types";
 export async function fetchStatuses() {
     let gql_client = new GraphQLClient(GRAPHQL_API);
     let bd_api = new BigDipperApi(gql_client);
-    let validators = await bd_api.get_validators();
-    let slashing_params = await bd_api.get_slashing_params();
+    let validators: any = await bd_api.get_validators();
+    let slashing_params: any = await bd_api.get_slashing_params();
     let signed_blocks_window = slashing_params[0].params.signed_blocks_window;
     let validators_modified: ValidatorModified[] = [];
     let missed_blocks_counter = 0;
