@@ -45,7 +45,7 @@ ZAPIER_WEBHOOK_URL = "https://hooks.zapier.com/hooks/catch/13178942/bl162ha/"
 # kv_namespaces = []
 
 [triggers]
-crons = ["* * * * *"]
+crons = ["0 * * * *"]
 
 ###############################################################
 ###             SECTION 3: Local Development                ###
