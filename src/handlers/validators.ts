@@ -3,11 +3,11 @@ import { GraphQLClient } from "../helpers/graphql";
 import { BigDipperApi } from "../api/bigDipperApi";
 import { ValidatorModified } from "../types/types";
 
-export async function handler(request: Request): Promise<Response> {
+export async function fetchStatuses() {
     let gql_client = new GraphQLClient(GRAPHQL_API);
     let bd_api = new BigDipperApi(gql_client);
-    let validators = await bd_api.get_validators();
-    let slashing_params = await bd_api.get_slashing_params();
+    let validators: any = await bd_api.get_validators();
+    let slashing_params: any = await bd_api.get_slashing_params();
     let signed_blocks_window = slashing_params[0].params.signed_blocks_window;
     let validators_modified: ValidatorModified[] = [];
     let missed_blocks_counter = 0;
@@ -27,9 +27,14 @@ export async function handler(request: Request): Promise<Response> {
             continue;
         }
 
-        validators_modified.sort((a,b) => (a.operatorAddress > b.operatorAddress) ? 1 : ((b.operatorAddress > a.operatorAddress) ? -1 : 0));
+        validators_modified.sort((a, b) => (a.operatorAddress > b.operatorAddress) ? 1 : ((b.operatorAddress > a.operatorAddress) ? -1 : 0));
 
     }
+    return validators_modified;
+}
+
+export async function handler(request: Request): Promise<Response> {
+    let validators_modified = await fetchStatuses();
 
     return new Response(JSON.stringify(validators_modified));
 }
