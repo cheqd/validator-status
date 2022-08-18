@@ -17,12 +17,10 @@
   },
   "private": true,
   "scripts": {
-    "start": "npx wrangler dev --local",
+    "start": "npx wrangler dev",
     "publish": "npx wrangler publish"
   },
   "dependencies": {
-    "itty-router": "^2.6.1",
-    "ky": "^0.31.1",
-    "request": "^2.88.2"
+    "itty-router": "^2.6.1"
   }
 }

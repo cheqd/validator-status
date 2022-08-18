@@ -1,11 +1,11 @@
 import { IHTTPMethods, Request, Router } from 'itty-router'
 import { handler as validators } from './handlers/validators';
-import { zapierTrigger } from "./handlers/zapierTrigger";
+import { zapierTriggers } from "./handlers/zapierTriggers";
 
 addEventListener('scheduled', (event: any) => {
     // @ts-ignore
     console.log('calling scheduled event...', { event })
-    event.waitUntil(zapierTrigger(event));
+    event.waitUntil(zapierTriggers(event));
 })
 
 addEventListener('fetch', (event: any) => {
