@@ -1,21 +1,21 @@
 import { fetchStatuses } from './validators';
-import { request } from "request";
-import { ServerResponse } from "http";
+import axios from "axios";
 
 export function zapierTrigger(event: Event) {
     (async () => {
-        const statuses = fetchStatuses();
+        const callZapierWebhook = async () => {
+            const statuses = fetchStatuses();
+            
+            try {
+                const res = await axios.post(ZAPIER_WEBHOOK_URL, statuses);
 
-        const res = request.post(
-            ZAPIER_WEBHOOK_URL,
-            statuses,
-            function (error: any, response: ServerResponse, body: string) {
-                if (!error && response.statusCode == 200) {
-                    console.log(body);
-                }
+                console.log(`Status: ${res.status}`);
+                console.log('Body: ', res.data);
+            } catch (err) {
+                console.error(err);
             }
-        );
+        };
 
-        console.log({ statuses, res })
+        await callZapierWebhook();
     })()
 }
