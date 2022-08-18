@@ -12,8 +12,10 @@ main = "src/index.ts"
 account_id = ""
 
 # Date in yyyy-mm-dd to determine which version of Workers runtime to use
-# Details: https://developers.cloudflare.com/workers/platform/compatibility-dates/ 
+# Details: https://developers.cloudflare.com/workers/platform/compatibility-dates/
 compatibility_date = "2022-05-24"
+
+node_compat = true
 
 # Usage model for the Worker
 # Details: https://developers.cloudflare.com/workers/platform/limits
@@ -28,7 +30,7 @@ usage_model = "bundled"
 workers_dev = true
 
 # Route to publish the Worker
-route = {pattern = "validator-status.cheqd.net/*", zone_id = "88e06eefedbbd140a12ac3dd1b21a7af"}
+route = { pattern = "validator-status.cheqd.net/*", zone_id = "88e06eefedbbd140a12ac3dd1b21a7af" }
 
 # Map of environment variables to set when deploying the Worker
 # Not inherited. @default `{}`
@@ -37,12 +39,16 @@ route = {pattern = "validator-status.cheqd.net/*", zone_id = "88e06eefedbbd140a1
 ENVIRONMENT = "production"
 # GraphQL API endpoint for target network. Must be sourced from a BigDipper instance.
 GRAPHQL_API = "https://explorer-gql.cheqd.io/v1/graphql"
+STATUS_URL = "https://validator-status.cheqd.net"
+ZAPIER_WEBHOOK_URL = "https://hooks.zapier.com/hooks/catch/13178942/blmispk/"
 
 # KV Namespaces accessible from the Worker
 # Details: https://developers.cloudflare.com/workers/learning/how-kv-works
 # @default `[]`
 # kv_namespaces = []
 
+[triggers]
+crons = ["* * * * *"]
 
 ###############################################################
 ###             SECTION 3: Local Development                ###
@@ -50,15 +56,15 @@ GRAPHQL_API = "https://explorer-gql.cheqd.io/v1/graphql"
 
 # Configuration options for local development via Wrangler
 [dev]
-  # IP address for the local dev server to listen on
-  # @default `localhost`
-  ip = "localhost"
-  # Port for the local dev server to listen on
-  # @default `3000`
-  port = 8787
-  # Protocol that local wrangler dev server listens to requests on
-  # @default `http`
-  local_protocol = "http"
+# IP address for the local dev server to listen on
+# @default `localhost`
+ip = "localhost"
+# Port for the local dev server to listen on
+# @default `3000`
+port = 8787
+# Protocol that local wrangler dev server listens to requests on
+# @default `http`
+local_protocol = "http"
 
 ###############################################################
 ###             SECTION 4: Staging Environment              ###
@@ -73,11 +79,11 @@ name = "validator-status-staging"
 workers_dev = true
 
 # Route to publish the Worker
-route = {pattern = "validator-status-staging.cheqd.net/*", zone_id = "88e06eefedbbd140a12ac3dd1b21a7af"}
+route = { pattern = "validator-status-staging.cheqd.net/*", zone_id = "88e06eefedbbd140a12ac3dd1b21a7af" }
 
 # Map of environment variables to set when deploying the Worker
 # Not inherited. @default `{}`
-vars = { ENVIRONMENT = "staging", GRAPHQL_API = "https://explorer-gql.cheqd.io/v1/graphql" }
+vars = { ENVIRONMENT = "staging", GRAPHQL_API = "https://explorer-gql.cheqd.io/v1/graphql", STATUS_URL = "https://validator-status-staging.cheqd.net", ZAPIER_WEBHOOK_URL = "https://hooks.zapier.com/hooks/catch/13178942/blmispk/" }
 
 # KV Namespaces accessible from the Worker
 # Details: https://developers.cloudflare.com/workers/learning/how-kv-works
@@ -94,13 +100,13 @@ vars = { ENVIRONMENT = "staging", GRAPHQL_API = "https://explorer-gql.cheqd.io/v
 # Details: https://developers.cloudflare.com/workers/wrangler/custom-builds/
 # @default {}
 # [build]
-#   # Custom build command. On Linux and macOS, the command is executed in 
+#   # Custom build command. On Linux and macOS, the command is executed in
 #   # the `sh` shell and the `cmd` shell for Windows.
 #   # The `&&` and `||` shell operators may be used.
 #   command = ""
 #   # The directory in which the command is executed.
 #   cwd = "./src"
-#   # The directory to watch for changes while using `wrangler dev`, 
+#   # The directory to watch for changes while using `wrangler dev`,
 #   # defaults to the current working directory
 #   watch_dir = ""
 
