@@ -29,10 +29,11 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           wranglerVersion: '2.0.25'
-          environment: ${{ env.deployment }}
           preCommands: npm ci
           command: publish --env staging
-          secrets: ${{ secrets.WEBHOOK_URL }}
+          secrets: ZAPIER_URL
+        env:
+          ZAPIER_URL: ${{ secrets.WEBHOOK_URL }}
 
   production-deploy:
     name: "Cloudflare - Production"
@@ -59,7 +60,8 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           wranglerVersion: '2.0.25'
-          environment: ${{ env.deployment }}
           preCommands: npm ci
           command: publish
-          secrets: ${{ secrets.WEBHOOK_URL }}
+          secrets: ZAPIER_URL
+        env:
+          ZAPIER_URL: ${{ secrets.WEBHOOK_URL }}
