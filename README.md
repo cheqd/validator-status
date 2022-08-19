@@ -65,10 +65,10 @@ Using Cloudflare Workers, these APIs can be served in a highly-scalable fashion 
 
 The recommended method of interacting with this repository is using [Cloudflare Wrangler CLI](https://developers.cloudflare.com/workers/wrangler/get-started/).
 
-Dependencies can be installed using Yarn or any other package manager.
+Dependencies can be installed using NPM or any other package manager.
 
 ```bash
-yarn install
+npm install
 ```
 
 While our deployment uses Cloudflare Wrangler, the application itself could be modified to run on other platforms with some refactoring.
