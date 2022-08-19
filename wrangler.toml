@@ -34,6 +34,8 @@ route = { pattern = "validator-status.cheqd.net/*", zone_id = "88e06eefedbbd140a
 ENVIRONMENT = "production"
 # GraphQL API endpoint for target network. Must be sourced from a BigDipper instance.
 GRAPHQL_API = "https://explorer-gql.cheqd.io/v1/graphql"
+# Set endpoint for webhook URL to send regular updates to
+WEBHOOK_URL = ""
 
 # KV Namespaces accessible from the Worker
 # Details: https://developers.cloudflare.com/workers/learning/how-kv-works
