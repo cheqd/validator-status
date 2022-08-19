@@ -25,14 +25,15 @@ jobs:
 
       - name: Publish to Cloudflare
         uses: cloudflare/wrangler-action@2.0.0
-        env:
-          WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
         with:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           wranglerVersion: '2.0.25'
           preCommands: npm ci
           command: publish --env staging
+          secrets: WEBHOOK_URL
+        env:
+          WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
 
   production-deploy:
     name: "Cloudflare - Production"
@@ -55,11 +56,12 @@ jobs:
 
       - name: Publish to Cloudflare
         uses: cloudflare/wrangler-action@2.0.0
-        env:
-          WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
         with:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           wranglerVersion: '2.0.25'
           preCommands: npm ci
           command: publish
+          secrets: WEBHOOK_URL
+        env:
+          WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
