@@ -31,9 +31,9 @@ jobs:
           wranglerVersion: '2.0.25'
           preCommands: npm ci
           command: publish --env staging
-          secrets: ZAPIER_URL
+          secrets: WEBHOOK_URL
         env:
-          ZAPIER_URL: ${{ secrets.WEBHOOK_URL }}
+          WEBHOOK_URL: ${{ secrets.ZAPIER_URL }}
 
   production-deploy:
     name: "Cloudflare - Production"
@@ -62,6 +62,6 @@ jobs:
           wranglerVersion: '2.0.25'
           preCommands: npm ci
           command: publish
-          secrets: ZAPIER_URL
+          secrets: WEBHOOK_URL
         env:
-          ZAPIER_URL: ${{ secrets.WEBHOOK_URL }}
+          WEBHOOK_URL: ${{ secrets.ZAPIER_URL }}
