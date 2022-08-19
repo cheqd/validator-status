@@ -9,7 +9,7 @@ async function sendValidatorStatuses() {
     const statuses = await fetchStatuses();
 
     try {
-        const res = await ky.post(ZAPIER_WEBHOOK_URL, {
+        const res = await ky.post(WEBHOOK_URL, {
             body: JSON.stringify(statuses)
         }).json()
 
