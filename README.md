@@ -4,7 +4,7 @@
 
 ## ℹ️ Overview
 
-Most validator status reporting software in [Cosmos SDK](https://cosmos.network/) is designed to be run *directly* by a node operator to monitor their own nodes. This typically pulls data from [the Tendermint Prometheus metrics sink](https://docs.tendermint.com/master/nodes/metrics.html) exposed on a node.
+Most validator status reporting software in [Cosmos SDK](https://cosmos.network/) is designed to be run *directly* by a node operator to monitor their own nodes. This typically pulls data from [the Tendermint Prometheus metrics sink](https://docs.tendermint.com/v0.34/tendermint-core/metrics.html) exposed on a node.
 
 We wanted to build a way to monitor the status of validator nodes *globally* across the cheqd mainnet, and raise alerts in case validator nodes were losing blocks. (Validator nodes [can get jailed if they miss too many blocks](https://docs.cosmos.network/main/modules/slashing/) and their stake slashed.)
 
@@ -65,10 +65,10 @@ Using Cloudflare Workers, these APIs can be served in a highly-scalable fashion 
 
 The recommended method of interacting with this repository is using [Cloudflare Wrangler CLI](https://developers.cloudflare.com/workers/wrangler/get-started/).
 
-Dependencies can be installed using Yarn or any other package manager.
+Dependencies can be installed using NPM or any other package manager.
 
 ```bash
-yarn install
+npm install
 ```
 
 While our deployment uses Cloudflare Wrangler, the application itself could be modified to run on other platforms with some refactoring.
