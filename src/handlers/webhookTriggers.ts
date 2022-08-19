@@ -1,7 +1,7 @@
 import { fetchStatuses } from './validators';
 import ky from "ky";
 
-export async function zapierTriggers(event: Event) {
+export async function webhookTriggers(event: Event) {
     await sendValidatorStatuses();
 }
 

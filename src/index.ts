@@ -1,17 +1,14 @@
 import { IHTTPMethods, Request, Router } from 'itty-router'
 import { handler as validators } from './handlers/validators';
-import { zapierTriggers } from "./handlers/zapierTriggers";
+import { webhookTriggers } from "./handlers/webhookTriggers";
 
 addEventListener('scheduled', (event: any) => {
-    // @ts-ignore
-    console.log('calling scheduled event...', { event })
-    event.waitUntil(zapierTriggers(event));
+    event.waitUntil(webhookTriggers(event));
 })
 
 addEventListener('fetch', (event: any) => {
     const router = Router<Request, IHTTPMethods>()
     registerRoutes(router);
-
     event.respondWith(router.handle(event.request).catch(handleError))
 })
 
