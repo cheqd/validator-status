@@ -1,13 +1,10 @@
 import { Request } from "itty-router";
+import { fetchStatuses } from "../validators";
 
-export async function handlerJailed(request: Request): Promise<Response> {
+export async function handler(request: Request): Promise<Response> {
     let statuses = await KVValidatorStatuses.list({
-        prefix: "jailed.",
+        prefix: "jailed",
     });
 
-    return new Response(JSON.stringify(statuses.keys), {
-        headers: {
-            'content-type': 'application/json;charset=UTF-8',
-        },
-    });
+    return new Response(JSON.stringify(statuses));
 }

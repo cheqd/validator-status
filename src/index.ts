@@ -1,9 +1,6 @@
 import { IHTTPMethods, Request, Router } from 'itty-router'
 import { handler as validators } from './handlers/validators';
 import { webhookTriggers } from "./handlers/webhookTriggers";
-import { handlerActive } from "./handlers/validators/active";
-import { handlerJailed } from "./handlers/validators/jailed";
-import { handlerTombstoned } from "./handlers/validators/tombstoned";
 
 addEventListener('scheduled', (event: any) => {
     event.waitUntil(webhookTriggers(event));
@@ -17,9 +14,9 @@ addEventListener('fetch', (event: any) => {
 
 function registerRoutes(router: Router) {
     router.get('/', validators);
-    router.get('/active', handlerActive);
-    router.get('/jailed', handlerJailed);
-    router.get('/tombstoned', handlerTombstoned);
+    router.get('/active', validators);
+    router.get('/jailed', validators);
+    router.get('/tombstoned', validators);
     router.get('/never-jailed', validators);
     router.get('/never-jailed', validators);
 
