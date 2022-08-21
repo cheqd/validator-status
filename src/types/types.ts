@@ -10,6 +10,12 @@ export type SlashingParams = {
   params: Params;
 }
 
+export enum ValidatorStatus {
+    Active = 1,
+    Jailed = 2,
+    Tombstoned = 3,
+}
+
 export type ValidatorStatuses = {
     status: number;
     jailed: boolean;

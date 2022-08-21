@@ -14,6 +14,11 @@ addEventListener('fetch', (event: any) => {
 
 function registerRoutes(router: Router) {
     router.get('/', validators);
+    router.get('/active', validators);
+    router.get('/jailed', validators);
+    router.get('/tombstoned', validators);
+    router.get('/never-jailed', validators);
+    router.get('/never-jailed', validators);
 
     // 404 for all other requests
     router.all('*', () => new Response('Not Found.', { status: 404 }))
