@@ -1,8 +1,8 @@
 import { Request } from "itty-router";
 
-export async function handlerJailed(request: Request): Promise<Response> {
+export async function handlerActive(request: Request): Promise<Response> {
     let statuses = await KVValidatorStatuses.list({
-        prefix: "jailed.",
+        prefix: "active.",
     });
 
     return new Response(JSON.stringify(statuses.keys), {
