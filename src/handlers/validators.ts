@@ -17,15 +17,16 @@ export async function fetchStatuses() {
             missed_blocks_counter = validators[i].validatorSigningInfos[0].missedBlocksCounter;
             validators[i].validatorCondition = (1 - (missed_blocks_counter / signed_blocks_window)) * 100;
             let status: any = {
+                unboundingHeight: validators[i].unbonding_height,
                 operatorAddress: validators[i].validatorInfo.operatorAddress,
-                jailed: validators[i].validatorStatuses[0].jailed,
+                hasBeenJailed: validators[i].validatorStatuses[0].jailed,
                 status: validators[i].validatorStatuses[0].status,
                 moniker: validators[i].validatorDescriptions[0].moniker,
-                condition: validators[i].validatorCondition,
+                condition: validators[i].validatorCondition.toFixed(2),
             };
 
             let statusText = "active";
-            if (status.jailed || status.status === ValidatorStatus.Jailed) {
+            if (status.hasBeenJailed) {
                 statusText = "jailed";
             } else {
                 if (status.status === ValidatorStatus.Tombstoned) {
@@ -34,7 +35,6 @@ export async function fetchStatuses() {
             }
 
             let key = `${statusText}.${status.operatorAddress}`;
-            console.log({ key, status })
             let bytes = new TextEncoder().encode(JSON.stringify(status));
 
             // always update kv store with the latest validator status
