@@ -58,7 +58,7 @@ jobs:
         with:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          wranglerVersion: '2.0.25'
+          wranglerVersion: '2.0.26'
           preCommands: npm ci
           command: publish
           secrets: WEBHOOK_URL
