@@ -33,7 +33,7 @@ jobs:
           wranglerVersion: '2.0.27'
           environment: "staging"
           preCommands: npm ci
-          command: publish --env
+          command: publish --env staging
           secrets: |
             WEBHOOK_URL
         env:
@@ -66,6 +66,7 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           wranglerVersion: '2.0.27'
+          environment: "production"
           preCommands: npm ci
           command: publish
           secrets: |
