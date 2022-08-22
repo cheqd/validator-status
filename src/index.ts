@@ -1,13 +1,8 @@
 import { IHTTPMethods, Request, Router } from 'itty-router'
 import { handler as validators } from './handlers/validators';
-import { webhookTriggers } from "./handlers/webhookTriggers";
 import { handlerActive } from "./handlers/validators/active";
 import { handlerJailed } from "./handlers/validators/jailed";
 import { handlerTombstoned } from "./handlers/validators/tombstoned";
-
-addEventListener('scheduled', (event: any) => {
-    event.waitUntil(webhookTriggers(event));
-})
 
 addEventListener('fetch', (event: any) => {
     const router = Router<Request, IHTTPMethods>()

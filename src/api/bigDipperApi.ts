@@ -13,7 +13,6 @@ query Validator {
       status
       jailed
       height
-      tombstoned
     }
     validatorSigningInfos: validator_signing_infos(order_by: {height: desc}, limit: 1) {
       missedBlocksCounter: missed_blocks_counter
@@ -21,6 +20,9 @@ query Validator {
     }
     validatorInfo: validator_info {
       operatorAddress: operator_address
+    }
+    validatorDescriptions: validator_descriptions(order_by: {height: desc}, limit: 1) {
+      moniker
     }
   }
 }`;

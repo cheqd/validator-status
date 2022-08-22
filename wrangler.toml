@@ -38,7 +38,6 @@ kv_namespaces = [
 ENVIRONMENT = "production"
 # GraphQL API endpoint for target network. Must be sourced from a BigDipper instance.
 GRAPHQL_API = "https://explorer-gql.cheqd.io/v1/graphql"
-WEBHOOK_URL = ""
 
 # KV Namespaces accessible from the Worker
 # Details: https://developers.cloudflare.com/workers/learning/how-kv-works
@@ -78,17 +77,22 @@ workers_dev = true
 # Route to publish the Worker
 route = { pattern = "validator-status-staging.cheqd.net/*", zone_id = "88e06eefedbbd140a12ac3dd1b21a7af" }
 
+kv_namespaces = [
+    { binding = "KVValidatorStatuses", id = "48b5d2e70cd04ebf8c432c69d03c4b53", preview_id = "50482212243648cdbb290f12aa677e95" },
+]
+
+[env.staging.vars]
 # Map of environment variables to set when deploying the Worker
 # Not inherited. @default `{}`
-vars = { ENVIRONMENT = "staging", GRAPHQL_API = "https://explorer-gql.cheqd.io/v1/graphql" }
+ENVIRONMENT = "staging"
+# GraphQL API endpoint for target network. Must be sourced from a BigDipper instance.
+GRAPHQL_API = "https://explorer-gql.cheqd.io/v1/graphql"
 
 # KV Namespaces accessible from the Worker
 # Details: https://developers.cloudflare.com/workers/learning/how-kv-works
 # @default `[]`
 # kv_namespaces = []
-kv_namespaces = [
-    { binding = "KVValidatorStatuses", id = "50482212243648cdbb290f12aa677e95" },
-]
+
 
 ###############################################################
 ###               OPTIONAL: Build Configuration             ###

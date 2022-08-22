@@ -17,7 +17,6 @@ export async function fetchStatuses() {
             missed_blocks_counter = validators[i].validatorSigningInfos[0].missedBlocksCounter;
             validators[i].validatorCondition = (1 - (missed_blocks_counter / signed_blocks_window)) * 100;
             let status: any = {
-                unboundingHeight: validators[i].unbonding_height,
                 operatorAddress: validators[i].validatorInfo.operatorAddress,
                 hasBeenJailed: validators[i].validatorStatuses[0].jailed,
                 status: validators[i].validatorStatuses[0].status,
@@ -41,8 +40,6 @@ export async function fetchStatuses() {
             const res = await KVValidatorStatuses.put(key, bytes);
 
             statuses.push(status);
-        } else {
-
         }
     }
 

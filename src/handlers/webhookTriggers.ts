@@ -1,12 +1,11 @@
 import { fetchStatuses } from './validators';
 
-export async function webhookTriggers(event: Event) {
-    await sendValidatorStatuses();
+export async function webhookTriggers(event: Event, env: any) {
+    await sendValidatorStatuses(env);
 }
 
-async function sendValidatorStatuses() {
+async function sendValidatorStatuses(env: any) {
     const statuses = await fetchStatuses();
-
     try {
         const init = {
             body: JSON.stringify(statuses),
@@ -15,7 +14,7 @@ async function sendValidatorStatuses() {
                 'content-type': 'application/json;charset=UTF-8',
             },
         };
-        const response = await fetch(WEBHOOK_URL, init);
+        const response = await fetch(env.WEBHOOK_URL, init);
         console.log('Res: ', response);
     } catch (err: any) {
         console.error(err)
