@@ -16,6 +16,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+        with:
+          persist-credentials: false
 
       - uses: actions/setup-node@v3
         with:
@@ -25,14 +27,17 @@ jobs:
 
       - name: Publish to Cloudflare
         uses: cloudflare/wrangler-action@2.0.0
-        env:
-          WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
         with:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          wranglerVersion: '2.0.25'
+          wranglerVersion: '2.0.27'
+          environment: "staging"
           preCommands: npm ci
           command: publish --env staging
+          secrets: |
+            WEBHOOK_URL
+        env:
+          WEBHOOK_URL: ${{ env.ZAPIER_URL }}
 
   production-deploy:
     name: "Cloudflare - Production"
@@ -46,6 +51,8 @@ jobs:
       url: https://validator-status.cheqd.net/
     steps:
       - uses: actions/checkout@v3
+        with:
+          persist-credentials: false
 
       - uses: actions/setup-node@v3
         with:
@@ -55,11 +62,14 @@ jobs:
 
       - name: Publish to Cloudflare
         uses: cloudflare/wrangler-action@2.0.0
-        env:
-          WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
         with:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          wranglerVersion: '2.0.25'
+          wranglerVersion: '2.0.27'
+          environment: "production"
           preCommands: npm ci
           command: publish
+          secrets: |
+            WEBHOOK_URL
+        env:
+          WEBHOOK_URL: ${{ env.ZAPIER_URL }}
