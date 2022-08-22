@@ -78,7 +78,7 @@ route = { pattern = "validator-status-staging.cheqd.net/*", zone_id = "88e06eefe
 
 # Map of environment variables to set when deploying the Worker
 # Not inherited. @default `{}`
-vars = { ENVIRONMENT = "staging", GRAPHQL_API = "https://explorer-gql.cheqd.io/v1/graphql", WEBHOOK_URL = "" }
+vars = { ENVIRONMENT = "staging", GRAPHQL_API = "https://explorer-gql.cheqd.io/v1/graphql" }
 
 # KV Namespaces accessible from the Worker
 # Details: https://developers.cloudflare.com/workers/learning/how-kv-works
