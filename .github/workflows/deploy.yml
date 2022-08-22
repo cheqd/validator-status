@@ -33,8 +33,8 @@ jobs:
           wranglerVersion: '2.0.6'
           preCommands: npm ci
           command: publish --env staging
-          secrets: |
-            WEBHOOK_URL
+          # secrets: |
+          #   WEBHOOK_URL
         env:
           WEBHOOK_URL: ${{ secrets.ZAPIER_URL }}
 
