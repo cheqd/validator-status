@@ -3,7 +3,7 @@
 ###############################################################
 
 # Worker name
-name = "validator-status-staging"
+name = "validator-status"
 
 # Entrypoint/path to the file that will be executed
 main = "src/index.ts"
