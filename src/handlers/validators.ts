@@ -1,7 +1,8 @@
 import { Request } from "itty-router";
 import { GraphQLClient } from "../helpers/graphql";
 import { BigDipperApi } from "../api/bigDipperApi";
-import { ValidatorModified, ValidatorStatus } from "../types/types";
+import { ValidatorModified } from "../types/types";
+import { getValidatorStatus } from "../helpers/validators";
 
 export async function fetchStatuses() {
     let gql_client = new GraphQLClient(GRAPHQL_API);
@@ -17,28 +18,21 @@ export async function fetchStatuses() {
             missed_blocks_counter = validators[i].validatorSigningInfos[0].missedBlocksCounter;
             validators[i].validatorCondition = (1 - (missed_blocks_counter / signed_blocks_window)) * 100;
             let status: any = {
-                unboundingHeight: validators[i].unbonding_height,
                 operatorAddress: validators[i].validatorInfo.operatorAddress,
-                hasBeenJailed: validators[i].validatorStatuses[0].jailed,
+                jailed: validators[i].validatorStatuses[0].jailed,
                 status: validators[i].validatorStatuses[0].status,
                 moniker: validators[i].validatorDescriptions[0].moniker,
                 condition: validators[i].validatorCondition.toFixed(2),
             };
 
-            let statusText = "active";
-            if (status.hasBeenJailed) {
-                statusText = "jailed";
-            } else {
-                if (status.status === ValidatorStatus.Tombstoned) {
-                    statusText = "tombstoned";
-                }
-            }
 
-            let key = `${statusText}.${status.operatorAddress}`;
-            let bytes = new TextEncoder().encode(JSON.stringify(status));
+            const statusText = getValidatorStatus(status.status, status.jailed, status.tombstoned)
+
+            const key = `${statusText.status}.${status.operatorAddress}`;
+            // const bytes = new TextEncoder().encode(JSON.stringify(status));
 
             // always update kv store with the latest validator status
-            const res = await KVValidator.put(key, bytes);
+            const res = await KVValidator.put(key, JSON.stringify(status));
 
             statuses.push(status);
         }
@@ -47,6 +41,20 @@ export async function fetchStatuses() {
     statuses.sort((a, b) => (a.operatorAddress > b.operatorAddress) ? 1 : ((b.operatorAddress > a.operatorAddress) ? -1 : 0));
 
     return statuses;
+}
+
+export async function fetchStatusesByStatus(prefix: string) {
+    let statuses = await KVValidator.list({
+        prefix: prefix,
+    });
+
+    let data = [];
+    for (const status of statuses.keys) {
+        const s: any = await KVValidator.get(status.name);
+        data.push(JSON.parse(s));
+    }
+
+    return data;
 }
 
 export async function handler(request: Request): Promise<Response> {

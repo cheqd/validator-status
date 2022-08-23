@@ -25,17 +25,17 @@ usage_model = "bundled"
 workers_dev = true
 
 # Route to publish the Worker
-route = { pattern = "validator-status.cheqd.net/*", zone_id = "88e06eefedbbd140a12ac3dd1b21a7af" }
+oute = { pattern = "validator-status.cheqd.net/*", zone_id = "88e06eefedbbd140a12ac3dd1b21a7af" }
 
 kv_namespaces = [
-    { binding = "KVValidator", id = "589d3c73c0f743fe915d396950dc2c36", preview_id = "589d3c73c0f743fe915d396950dc2c36" },
+    { binding = "KVValidator", id = "dc2b6488ddf043a79608f360bd5ff521", preview_id = "dc2b6488ddf043a79608f360bd5ff521" },
 ]
 
 # Map of environment variables to set when deploying the Worker
 # Not inherited. @default `{}`
 [vars]
 # Environment for Worker target
-ENVIRONMENT = "production"
+ENVIRONMENT = "dev"
 # GraphQL API endpoint for target network. Must be sourced from a BigDipper instance.
 GRAPHQL_API = "https://explorer-gql.cheqd.io/v1/graphql"
 
@@ -77,10 +77,6 @@ workers_dev = true
 # Route to publish the Worker
 route = { pattern = "validator-status-staging.cheqd.net/*", zone_id = "88e06eefedbbd140a12ac3dd1b21a7af" }
 
-kv_namespaces = [
-    { binding = "KVValidator", id = "95cd4fcd28c74edb98f2c5966731908f", preview_id = "95cd4fcd28c74edb98f2c5966731908f" },
-]
-
 [env.staging.triggers]
 crons = ["*/5 * * * *"]
 
@@ -90,6 +86,16 @@ crons = ["*/5 * * * *"]
 ENVIRONMENT = "staging"
 # GraphQL API endpoint for target network. Must be sourced from a BigDipper instance.
 GRAPHQL_API = "https://explorer-gql.cheqd.io/v1/graphql"
+
+
+[env.production]
+
+kv_namespaces = [
+    { binding = "KVValidator", id = "ccd0ce292b1b4f5082b75f49556c1ab8", preview_id = "ccd0ce292b1b4f5082b75f49556c1ab8" },
+]
+
+[env.production.vars]
+ENVIRONMENT = "production"
 
 # KV Namespaces accessible from the Worker
 # Details: https://developers.cloudflare.com/workers/learning/how-kv-works
