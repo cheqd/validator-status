@@ -17,6 +17,7 @@ export async function fetchStatuses() {
             missed_blocks_counter = validators[i].validatorSigningInfos[0].missedBlocksCounter;
             validators[i].validatorCondition = (1 - (missed_blocks_counter / signed_blocks_window)) * 100;
             let status: any = {
+                unboundingHeight: validators[i].unbonding_height,
                 operatorAddress: validators[i].validatorInfo.operatorAddress,
                 hasBeenJailed: validators[i].validatorStatuses[0].jailed,
                 status: validators[i].validatorStatuses[0].status,
@@ -37,7 +38,7 @@ export async function fetchStatuses() {
             let bytes = new TextEncoder().encode(JSON.stringify(status));
 
             // always update kv store with the latest validator status
-            const res = await KVValidators.put(key, bytes);
+            const res = await KVValidator.put(key, bytes);
 
             statuses.push(status);
         }

@@ -16,7 +16,6 @@ function registerRoutes(router: Router) {
     router.get('/jailed', handlerJailed);
     router.get('/tombstoned', handlerTombstoned);
     router.get('/never-jailed', validators);
-    router.get('/never-jailed', validators);
 
     // 404 for all other requests
     router.all('*', () => new Response('Not Found.', { status: 404 }))

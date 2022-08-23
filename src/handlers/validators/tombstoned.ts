@@ -1,7 +1,7 @@
 import { Request } from "itty-router";
 
 export async function handlerTombstoned(request: Request): Promise<Response> {
-    let statuses = await KVValidators.list({
+    let statuses = await KVValidator.list({
         prefix: "tombstoned.",
     });
 

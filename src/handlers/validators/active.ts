@@ -1,7 +1,7 @@
 import { Request } from "itty-router";
 
 export async function handlerActive(request: Request): Promise<Response> {
-    let statuses = await KVValidators.list({
+    let statuses = await KVValidator.list({
         prefix: "active.",
     });
 

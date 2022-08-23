@@ -81,6 +81,9 @@ kv_namespaces = [
     { binding = "KVValidator", id = "3ed5bb79d2f9481d95a041d4390d827f" },
 ]
 
+[env.staging.triggers]
+crons = ["*/5 * * * *"]
+
 [env.staging.vars]
 # Map of environment variables to set when deploying the Worker
 # Not inherited. @default `{}`
