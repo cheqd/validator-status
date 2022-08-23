@@ -1,8 +1,22 @@
 import { Request } from "itty-router";
 import { GraphQLClient } from "../helpers/graphql";
 import { BigDipperApi } from "../api/bigDipperApi";
-import { ValidatorModified } from "../types/types";
-import { getValidatorStatus } from "../helpers/validators";
+import { ValidatorStatus } from "../types/types";
+
+const epoch = new Date("2016-3-17");
+
+type Status = {
+    _: any;
+    operatorAddress: string,
+    moniker: string,
+    jailed: boolean,
+    status: ValidatorStatus,
+    explorerUrl: string
+    activeBlocks: number,
+    lastChecked: Date,
+    lastJailed: Date,
+    jailedCount: number,
+};
 
 export async function fetchStatuses() {
     let gql_client = new GraphQLClient(GRAPHQL_API);
@@ -10,31 +24,15 @@ export async function fetchStatuses() {
     let validators: any = await bd_api.get_validators();
     let slashing_params: any = await bd_api.get_slashing_params();
     let signed_blocks_window = slashing_params[0].params.signed_blocks_window;
-    let statuses: ValidatorModified[] = [];
-    let missed_blocks_counter = 0;
 
+    let statuses: Status[] = [];
     for (let i = 0; i < validators.length; i++) {
+        let s = validators[i];
+        let missed_blocks_counter = s.validatorSigningInfos[0].missedBlocksCounter;
+        s.validatorCondition = (1 - (missed_blocks_counter / signed_blocks_window)) * 100;
+
         if ((Object.keys(validators[i].validatorSigningInfos).length !== 0) && (Object.keys(validators[i].validatorStatuses).length !== 0)) {
-            missed_blocks_counter = validators[i].validatorSigningInfos[0].missedBlocksCounter;
-            validators[i].validatorCondition = (1 - (missed_blocks_counter / signed_blocks_window)) * 100;
-            let status: any = {
-                operatorAddress: validators[i].validatorInfo.operatorAddress,
-                jailed: validators[i].validatorStatuses[0].jailed,
-                status: validators[i].validatorStatuses[0].status,
-                moniker: validators[i].validatorDescriptions[0].moniker,
-                condition: validators[i].validatorCondition.toFixed(2),
-            };
-
-
-            const statusText = getValidatorStatus(status.status, status.jailed, status.tombstoned)
-
-            const key = `${statusText.status}.${status.operatorAddress}`;
-            // const bytes = new TextEncoder().encode(JSON.stringify(status));
-
-            // always update kv store with the latest validator status
-            const res = await KVValidator.put(key, JSON.stringify(status));
-
-            statuses.push(status);
+            statuses.push(await buildStatus(s));
         }
     }
 
@@ -43,18 +41,22 @@ export async function fetchStatuses() {
     return statuses;
 }
 
-export async function fetchStatusesByStatus(prefix: string) {
-    let statuses = await KVValidator.list({
-        prefix: prefix,
-    });
+async function buildStatus(s: any): Promise<Status> {
+    let state: ValidatorStatus = s.state;
 
-    let data = [];
-    for (const status of statuses.keys) {
-        const s: any = await KVValidator.get(status.name);
-        data.push(JSON.parse(s));
-    }
+    return {
+        _: s,
+        operatorAddress: s.validatorInfo.operatorAddress,
+        moniker: s.validatorDescriptions.moniker,
+        jailed: s.validatorStatuses.jailed,
+        status: state,
+        explorerUrl: `https://explorer.cheqd.io/validators/${s.validatorInfo.operatorAddress}`,
+        activeBlocks: parseFloat(s.validatorCondition.toFixed(2)),
+        lastChecked: epoch,
+        lastJailed: epoch,
+        jailedCount: 0
+    };
 
-    return data;
 }
 
 export async function handler(request: Request): Promise<Response> {

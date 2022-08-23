@@ -11,9 +11,11 @@ export type SlashingParams = {
 }
 
 export enum ValidatorStatus {
-    Unbonded = 1,
-    Unbonding = 2,
-    Active = 3,
+    Active = "active",
+    Jailed = "jailed",
+    Tombstoned = "tombstoned",
+    Degraded = "degraded",
+    NeverJailed = "never-jailed",
 }
 
 export type ValidatorStatuses = {
