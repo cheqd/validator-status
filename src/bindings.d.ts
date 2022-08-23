@@ -8,5 +8,6 @@ export default {
 
 declare global {
     const GRAPHQL_API: string;
-    const KVValidatorStatuses: KVNamespace;
+    const WEBHOOK_URL: string;
+    const KVValidators: KVNamespace;
 }

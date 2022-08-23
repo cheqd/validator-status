@@ -14,7 +14,7 @@ async function sendValidatorStatuses(env: any) {
                 'content-type': 'application/json;charset=UTF-8',
             },
         };
-        const response = await fetch(env.WEBHOOK_URL, init);
+        const response = await fetch(env.ZAPIER_URL, init);
         console.log('Res: ', response);
     } catch (err: any) {
         console.error(err)

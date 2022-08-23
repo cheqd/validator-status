@@ -37,7 +37,7 @@ export async function fetchStatuses() {
             let bytes = new TextEncoder().encode(JSON.stringify(status));
 
             // always update kv store with the latest validator status
-            const res = await KVValidatorStatuses.put(key, bytes);
+            const res = await KVValidators.put(key, bytes);
 
             statuses.push(status);
         }
