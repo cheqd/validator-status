@@ -7,13 +7,13 @@ export type Params = {
 }
 
 export type SlashingParams = {
-  params: Params;
+    params: Params;
 }
 
 export enum ValidatorStatus {
-    Active = 1,
-    Jailed = 2,
-    Tombstoned = 3,
+    Unbonded = 1,
+    Unbonding = 2,
+    Active = 3,
 }
 
 export type ValidatorStatuses = {
