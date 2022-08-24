@@ -1,4 +1,8 @@
-export const getValidatorStatus = (status: number, jailed: boolean, tombstoned: boolean) => {
+import { Statuses } from "../types/types";
+
+export const getValidatorStatus = (s: Statuses, tombstoned: boolean) => {
+    const { status, jailed,  } = s;
+
     const results = {
         status: 'na',
         theme: 'zero',
