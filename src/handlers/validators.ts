@@ -4,6 +4,8 @@ import { BigDipperApi } from "../api/bigDipperApi";
 import { ValidatorState, ValidatorStatus } from "../types/types";
 import { getValidatorStatus } from "../helpers/validators";
 
+const util = require('util')
+
 const epoch = new Date("2016-3-17");
 
 export async function fetchStatuses() {
@@ -20,7 +22,9 @@ export async function fetchStatuses() {
         s.validatorCondition = (1 - (missed_blocks_counter / signed_blocks_window)) * 100;
 
         if ((Object.keys(validators[i].validatorSigningInfos).length !== 0) && (Object.keys(validators[i].validatorStatuses).length !== 0)) {
-            statuses.push(await buildStatus(s));
+            let rec = await buildStatus(s)
+            statuses.push(rec);
+            await KVValidator.put(rec.operatorAddress, JSON.stringify(rec))
         }
     }
 
@@ -42,15 +46,6 @@ export async function fetchStatusesByState(state: string): Promise<Array<Validat
     return filtered;
 }
 
-/**
- * {
- *      "last_checked": XMLDateTime of when cron job ran
- * 	    "last_jailed": XMLDatetime of when node was last jailed ➝ block height timestamp
- *      "jailed_count": int
- * }
- *
- * @param v
- */
 async function buildStatus(v: any): Promise<ValidatorStatus> {
     let validatorStatus = getValidatorStatus(v.validatorStatuses[0], v.validatorSigningInfos.tombstoned)
 
@@ -68,6 +63,17 @@ async function buildStatus(v: any): Promise<ValidatorStatus> {
             s = ValidatorState[ValidatorState.Active]
     }
 
+    let jailedCount = 0
+    if (v.lastJailed != epoch) {
+        let rec = await KVValidator.get(v.operatorAddress)
+        if (rec) {
+            let val: ValidatorStatus = JSON.parse(rec)
+
+            jailedCount = val.jailedCount
+        }
+
+        jailedCount++
+    }
 
     return {
         operatorAddress: v.validatorInfo.operatorAddress,
@@ -80,7 +86,6 @@ async function buildStatus(v: any): Promise<ValidatorStatus> {
         jailedCount: 0
     };
 }
-
 
 export async function handler(request: Request): Promise<Response> {
     let statuses = await fetchStatuses();

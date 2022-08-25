@@ -12,6 +12,8 @@ main = "src/index.ts"
 # Details: https://developers.cloudflare.com/workers/platform/compatibility-dates/
 compatibility_date = "2022-05-24"
 
+node_compat = true
+
 # Usage model for the Worker
 # Details: https://developers.cloudflare.com/workers/platform/limits
 usage_model = "bundled"
@@ -28,7 +30,7 @@ workers_dev = true
 oute = { pattern = "validator-status.cheqd.net/*", zone_id = "88e06eefedbbd140a12ac3dd1b21a7af" }
 
 kv_namespaces = [
-    { binding = "KVValidator", id = "dc2b6488ddf043a79608f360bd5ff521", preview_id = "dc2b6488ddf043a79608f360bd5ff521" },
+    { binding = "KVValidator", id = "c0253e999c804b89b0c659fa61a5de35", preview_id = "c0253e999c804b89b0c659fa61a5de35" },
 ]
 
 # Map of environment variables to set when deploying the Worker
@@ -91,7 +93,7 @@ GRAPHQL_API = "https://explorer-gql.cheqd.io/v1/graphql"
 [env.production]
 
 kv_namespaces = [
-    { binding = "KVValidator", id = "ccd0ce292b1b4f5082b75f49556c1ab8", preview_id = "ccd0ce292b1b4f5082b75f49556c1ab8" },
+    { binding = "KVValidator", id = "c0253e999c804b89b0c659fa61a5de35", preview_id = "c0253e999c804b89b0c659fa61a5de35" },
 ]
 
 [env.production.vars]
@@ -134,4 +136,4 @@ ENVIRONMENT = "production"
 # minify = "false"
 
 # Add polyfills for node builtin modules and globals?
-# node_compat = "false"
+node_compat = true
