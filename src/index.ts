@@ -2,10 +2,8 @@ import { IHTTPMethods, Request, Router } from 'itty-router'
 import { handler as validators } from './handlers/validators';
 import { handlerActive } from "./handlers/validators/active";
 import { handlerJailed } from "./handlers/validators/jailed";
-import { handlerTombstoned } from "./handlers/validators/tombstoned";
 import { webhookTriggers } from "./handlers/webhookTriggers";
 import { handlerDegraded } from "./handlers/validators/degraded";
-import { handlerNeverJailed } from "./handlers/validators/neverJailed";
 
 addEventListener('scheduled', (event: any) => {
     event.waitUntil(webhookTriggers(event));
@@ -21,9 +19,9 @@ function registerRoutes(router: Router) {
     router.get('/', validators);
     router.get('/active', handlerActive);
     router.get('/jailed', handlerJailed);
-    router.get('/tombstoned', handlerTombstoned);
     router.get('/degraded', handlerDegraded);
-    router.get('/never-jailed', handlerNeverJailed);
+    // router.get('/tombstoned', handlerTombstoned);
+    // router.get('/never-jailed', handlerNeverJailed);
 
     // 404 for all other requests
     router.all('*', () => new Response('Not Found.', { status: 404 }))

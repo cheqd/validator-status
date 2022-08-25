@@ -6,7 +6,6 @@ import { getValidatorStatus } from "../helpers/validators";
 
 const epoch = new Date("2016-3-17");
 
-
 export async function fetchStatuses() {
     let gql_client = new GraphQLClient(GRAPHQL_API);
     let bd_api = new BigDipperApi(gql_client);
@@ -30,7 +29,7 @@ export async function fetchStatuses() {
     return statuses;
 }
 
-export async function fetchStatusesByState(state: string): Promise<Array<ValidatorStatus>>{
+export async function fetchStatusesByState(state: string): Promise<Array<ValidatorStatus>> {
     const statuses = await fetchStatuses()
     let filtered = new Array<ValidatorStatus>();
 
@@ -42,7 +41,6 @@ export async function fetchStatusesByState(state: string): Promise<Array<Validat
 
     return filtered;
 }
-
 
 /**
  * {
@@ -72,7 +70,6 @@ async function buildStatus(v: any): Promise<ValidatorStatus> {
 
 
     return {
-        _: v,
         operatorAddress: v.validatorInfo.operatorAddress,
         moniker: v.validatorDescriptions.moniker,
         status: s.toLowerCase(),
@@ -85,11 +82,10 @@ async function buildStatus(v: any): Promise<ValidatorStatus> {
 }
 
 
-
 export async function handler(request: Request): Promise<Response> {
     let statuses = await fetchStatuses();
 
-    return new Response(JSON.stringify(statuses),{
+    return new Response(JSON.stringify(statuses), {
         headers: {
             'content-type': 'application/json;charset=UTF-8',
         },
