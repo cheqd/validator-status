@@ -27,10 +27,10 @@ usage_model = "bundled"
 workers_dev = true
 
 # Route to publish the Worker
-oute = { pattern = "validator-status.cheqd.net/*", zone_id = "88e06eefedbbd140a12ac3dd1b21a7af" }
+route = { pattern = "validator-status.cheqd.net/*", zone_id = "88e06eefedbbd140a12ac3dd1b21a7af" }
 
 kv_namespaces = [
-    { binding = "KVValidator", id = "c0253e999c804b89b0c659fa61a5de35", preview_id = "c0253e999c804b89b0c659fa61a5de35" },
+    { binding = "KVValidator", id = "725584d389404f1a8aafbf4a1678ff8d" }
 ]
 
 # Map of environment variables to set when deploying the Worker
@@ -78,6 +78,10 @@ workers_dev = true
 
 # Route to publish the Worker
 route = { pattern = "validator-status-staging.cheqd.net/*", zone_id = "88e06eefedbbd140a12ac3dd1b21a7af" }
+
+kv_namespaces = [
+    { binding = "KVValidator", id = "725584d389404f1a8aafbf4a1678ff8d" }
+]
 
 [env.staging.triggers]
 crons = ["*/5 * * * *"]
