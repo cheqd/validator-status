@@ -1,10 +1,10 @@
 import { fetchStatuses } from './validators';
 
 export async function webhookTriggers(event: Event) {
-    await sendValidatorStatuses(event);
+    await sendValidatorStatuses();
 }
 
-async function sendValidatorStatuses(evmnt: any) {
+async function sendValidatorStatuses() {
     const statuses = await fetchStatuses();
     try {
         const init = {

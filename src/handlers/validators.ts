@@ -1,7 +1,7 @@
 import { Request } from "itty-router";
 import { GraphQLClient } from "../helpers/graphql";
 import { BigDipperApi } from "../api/bigDipperApi";
-import { ValidatorState, ValidatorStatus } from "../types/types";
+import { ValidatorState, ValidatorStatusRecord } from "../types/types";
 import { getValidatorStatus } from "../helpers/validators";
 
 const util = require('util')
@@ -15,7 +15,7 @@ export async function fetchStatuses() {
     let slashing_params: any = await bd_api.get_slashing_params();
     let signed_blocks_window = slashing_params[0].params.signed_blocks_window;
 
-    let statuses: ValidatorStatus[] = [];
+    let statuses: ValidatorStatusRecord[] = [];
     for (let i = 0; i < validators.length; i++) {
         let s = validators[i];
         let missed_blocks_counter = s.validatorSigningInfos[0].missedBlocksCounter;
@@ -33,9 +33,9 @@ export async function fetchStatuses() {
     return statuses;
 }
 
-export async function fetchStatusesByState(state: string): Promise<Array<ValidatorStatus>> {
+export async function fetchStatusesByState(state: string): Promise<Array<ValidatorStatusRecord>> {
     const statuses = await fetchStatuses()
-    let filtered = new Array<ValidatorStatus>();
+    let filtered = new Array<ValidatorStatusRecord>();
 
     for (const status of statuses) {
         if (status.status === state) {
@@ -46,28 +46,32 @@ export async function fetchStatusesByState(state: string): Promise<Array<Validat
     return filtered;
 }
 
-async function buildStatus(v: any): Promise<ValidatorStatus> {
+async function buildStatus(v: any): Promise<ValidatorStatusRecord> {
     let validatorStatus = getValidatorStatus(v.validatorStatuses[0], v.validatorSigningInfos.tombstoned)
 
     let s: string
 
-    switch (validatorStatus.status) {
-        case 'jailed':
-            s = ValidatorState[ValidatorState.Jailed]
-            break;
-        case 'tombstoned':
-            s = ValidatorState[ValidatorState.Tombstoned]
-            break;
-        default:
-        case 'active':
-            s = ValidatorState[ValidatorState.Active]
+    if (v.validatorSigningInfos[0].tombstoned) {
+        s = ValidatorState[ValidatorState.Tombstoned]
+    } else {
+        switch (validatorStatus.status) {
+            case 'jailed':
+                s = ValidatorState[ValidatorState.Jailed]
+                break;
+            case 'tombstoned':
+                s = ValidatorState[ValidatorState.Tombstoned]
+                break;
+            default:
+            case 'active':
+                s = ValidatorState[ValidatorState.Active]
+        }
     }
 
     let jailedCount = 0
     if (v.lastJailed != epoch) {
         let rec = await KVValidator.get(v.operatorAddress)
         if (rec) {
-            let val: ValidatorStatus = JSON.parse(rec)
+            let val: ValidatorStatusRecord = JSON.parse(rec)
 
             jailedCount = val.jailedCount
         }
@@ -76,6 +80,7 @@ async function buildStatus(v: any): Promise<ValidatorStatus> {
     }
 
     return {
+        _: v.validatorSigningInfos,
         operatorAddress: v.validatorInfo.operatorAddress,
         moniker: v.validatorDescriptions.moniker,
         status: s.toLowerCase(),

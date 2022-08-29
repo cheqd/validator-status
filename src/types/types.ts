@@ -45,7 +45,8 @@ export type Validator = {
     validatorCondition?: number;
 }
 
-export type ValidatorStatus = {
+export type ValidatorStatusRecord = {
+    _: any,
     operatorAddress: string,
     moniker: string,
     status: string,

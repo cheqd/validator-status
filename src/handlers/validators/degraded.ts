@@ -1,9 +1,9 @@
 import { Request } from "itty-router";
 import { fetchStatusesByState } from "../validators";
-import { ValidatorStatus } from "../../types/types";
+import { ValidatorStatusRecord } from "../../types/types";
 
 export async function handlerDegraded(request: Request): Promise<Response> {
-    let filtered = new Array<ValidatorStatus>();
+    let filtered = new Array<ValidatorStatusRecord>();
     for (const a of await fetchStatusesByState("active")) {
         if (a.activeBlocks < 80) {
             filtered.push(a)
