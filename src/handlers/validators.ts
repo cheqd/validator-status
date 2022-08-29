@@ -80,7 +80,7 @@ async function buildStatus(v: any): Promise<ValidatorStatusRecord> {
     }
 
     return {
-        _: v.validatorSigningInfos,
+        // _: v.validatorSigningInfos,
         operatorAddress: v.validatorInfo.operatorAddress,
         moniker: v.validatorDescriptions.moniker,
         status: s.toLowerCase(),
