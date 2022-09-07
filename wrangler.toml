@@ -81,7 +81,7 @@ route = { pattern = "validator-status-staging.cheqd.net/*", zone_id = "88e06eefe
 
 
 kv_namespaces = [
-    { binding = "KVValidator", id = "63936420758f4bce9bbdc284d2f317e2" }
+    { binding = "KVValidator", id = "bdfe4cf3d3254ae485731dbe51c79294", preview_id = "63936420758f4bce9bbdc284d2f317e2" }
 ]
 
 [env.staging.triggers]
@@ -106,7 +106,7 @@ ENVIRONMENT = "production"
 #]
 
 kv_namespaces = [
-    { binding = "KVValidator", id = "bdfe4cf3d3254ae485731dbe51c79294" }
+    { binding = "KVValidator", id = "bdfe4cf3d3254ae485731dbe51c79294", preview_id = "63936420758f4bce9bbdc284d2f317e2" }
 ]
 
 ###############################################################
