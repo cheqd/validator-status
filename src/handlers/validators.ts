@@ -93,6 +93,8 @@ async function buildStatus(v: any): Promise<ValidatorStatusRecord> {
 }
 
 export async function handler(request: Request): Promise<Response> {
+    console.log({WEBHOOK_URL: WEBHOOK_URL})
+
     let statuses = await fetchStatuses();
 
     return new Response(JSON.stringify(statuses), {
