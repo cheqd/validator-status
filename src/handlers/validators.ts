@@ -73,7 +73,7 @@ async function buildStatus(v: any): Promise<ValidatorStatusRecord> {
         if (rec) {
             let val: ValidatorStatusRecord = JSON.parse(rec)
 
-            jailedCount = val.jailedCount
+            // jailedCount = val.jailedCount
         }
 
         jailedCount++
@@ -88,7 +88,7 @@ async function buildStatus(v: any): Promise<ValidatorStatusRecord> {
         activeBlocks: parseFloat(v.validatorCondition.toFixed(2)),
         lastChecked: new Date(),
         lastJailed: epoch,
-        jailedCount: 0
+        // jailedCount: 0
     };
 }
 

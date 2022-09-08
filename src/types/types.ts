@@ -54,5 +54,5 @@ export type ValidatorStatusRecord = {
     activeBlocks: number,
     lastChecked: Date,
     lastJailed: Date,
-    jailedCount: number,
+    // jailedCount: number,
 };
