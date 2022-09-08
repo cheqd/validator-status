@@ -23,7 +23,7 @@ function registerRoutes(router: Router) {
     router.get('/jailed', handlerJailed);
     router.get('/degraded', handlerDegraded);
     router.get('/tombstoned', handlerTombstoned);
-    router.get('/never-jailed', handlerNeverJailed);
+    // router.get('/never-jailed', handlerNeverJailed);
 
     // 404 for all other requests
     router.all('*', () => new Response('Not Found.', { status: 404 }))
