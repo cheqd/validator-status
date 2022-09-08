@@ -1,4 +1,4 @@
-import { fetchStatuses } from './validators';
+import { fetchStatuses, fetchStatusesByState } from './validators';
 
 export async function webhookTriggers(event: Event) {
     console.log("triggering webhooks...")
@@ -6,7 +6,8 @@ export async function webhookTriggers(event: Event) {
 }
 
 async function sendValidatorStatuses() {
-    const statuses = await fetchStatuses();
+    const statuses = await fetchStatusesByState("degraded");
+
     try {
         const init = {
             body: JSON.stringify(statuses),

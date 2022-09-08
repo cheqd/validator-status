@@ -67,17 +67,17 @@ async function buildStatus(v: any): Promise<ValidatorStatusRecord> {
         }
     }
 
-    let jailedCount = 0
-    if (v.lastJailed != epoch) {
-        let rec = await KVValidator.get(v.operatorAddress)
-        if (rec) {
-            let val: ValidatorStatusRecord = JSON.parse(rec)
-
-            // jailedCount = val.jailedCount
-        }
-
-        jailedCount++
-    }
+    // let jailedCount = 0
+    // if (v.lastJailed != epoch) {
+    //     let rec = await KVValidator.get(v.operatorAddress)
+    //     if (rec) {
+    //         let val: ValidatorStatusRecord = JSON.parse(rec)
+    //
+    //         // jailedCount = val.jailedCount
+    //     }
+    //
+    //     jailedCount++
+    // }
 
     return {
         // _: v.validatorSigningInfos,
