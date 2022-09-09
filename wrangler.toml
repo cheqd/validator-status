@@ -120,4 +120,4 @@ crons = ["* * * * *"]
 # minify = "false"
 
 # Add polyfills for node builtin modules and globals?
-# node_compat = true
+node_compat = true
