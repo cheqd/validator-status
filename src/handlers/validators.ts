@@ -24,7 +24,7 @@ export async function fetchStatuses() {
         if ((Object.keys(validators[i].validatorSigningInfos).length !== 0) && (Object.keys(validators[i].validatorStatuses).length !== 0)) {
             let rec = await buildStatus(s)
             statuses.push(rec);
-            await KVValidator.put(rec.operatorAddress, JSON.stringify(rec))
+            await VALIDATOR_CONDITION.put(rec.operatorAddress, JSON.stringify(rec))
         }
     }
 
@@ -69,7 +69,7 @@ async function buildStatus(v: any): Promise<ValidatorStatusRecord> {
 
     // let jailedCount = 0
     // if (v.lastJailed != epoch) {
-    //     let rec = await KVValidator.get(v.operatorAddress)
+    //     let rec = await VALIDATOR_CONDITION.get(v.operatorAddress)
     //     if (rec) {
     //         let val: ValidatorStatusRecord = JSON.parse(rec)
     //
