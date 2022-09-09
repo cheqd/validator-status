@@ -16,6 +16,9 @@ compatibility_date = "2022-05-24"
 # Details: https://developers.cloudflare.com/workers/platform/limits
 usage_model = "bundled"
 
+# Add polyfills for node builtin modules and globals?
+node_compat = true
+
 ###############################################################
 ###            SECTION 2: Production Environment            ###
 ###############################################################
@@ -118,6 +121,3 @@ crons = ["* * * * *"]
 
 # Minify before uploading?
 # minify = "false"
-
-# Add polyfills for node builtin modules and globals?
-node_compat = true
