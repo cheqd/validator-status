@@ -39,7 +39,7 @@ ENVIRONMENT = "production"
 # GraphQL API endpoint for target network. Must be sourced from a BigDipper instance.
 GRAPHQL_API = "https://explorer-gql.cheqd.io/v1/graphql"
 # Set endpoint for webhook URL to send regular updates to
-# WEBHOOK_URL = ""
+WEBHOOK_URL = ""
 
 # KV Namespaces accessible from the Worker
 # Details: https://developers.cloudflare.com/workers/learning/how-kv-works
@@ -93,7 +93,7 @@ crons = ["* * * * *"]
 ENVIRONMENT = "staging"
 # GraphQL API endpoint for target network. Must be sourced from a BigDipper instance.
 GRAPHQL_API = "https://explorer-gql.cheqd.io/v1/graphql"
-# WEBHOOK_URL = ""
+WEBHOOK_URL = ""
 
 [env.production.vars]
 ENVIRONMENT = "production"
@@ -106,9 +106,9 @@ ENVIRONMENT = "production"
 #    { binding = "KVValidator", id = "8309366fa9a04028a75e57a915a3afea" },
 #]
 
-kv_namespaces = [
-    { binding = "KVValidator", id = "bdfe4cf3d3254ae485731dbe51c79294", preview_id = "63936420758f4bce9bbdc284d2f317e2" }
-]
+#kv_namespaces = [
+#    { binding = "KVValidator", id = "bdfe4cf3d3254ae485731dbe51c79294", preview_id = "63936420758f4bce9bbdc284d2f317e2" }
+#]
 
 ###############################################################
 ###               OPTIONAL: Build Configuration             ###
