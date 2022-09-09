@@ -90,7 +90,7 @@ kv_namespaces = [
 ]
 
 # Cron triggers for staging worker
-[env.staging.vars]
+[env.staging.triggers]
 crons = ["* * * * *"]
 
 ###############################################################
