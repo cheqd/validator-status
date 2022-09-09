@@ -93,7 +93,7 @@ crons = ["* * * * *"]
 ENVIRONMENT = "staging"
 # GraphQL API endpoint for target network. Must be sourced from a BigDipper instance.
 GRAPHQL_API = "https://explorer-gql.cheqd.io/v1/graphql"
-WEBHOOK_URL = ""
+# WEBHOOK_URL = ""
 
 [env.production.vars]
 ENVIRONMENT = "production"

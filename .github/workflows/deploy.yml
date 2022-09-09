@@ -34,6 +34,8 @@ jobs:
           environment: "staging"
           preCommands: npm ci
           command: publish --env staging
+          secrets: |
+            WEBHOOK_URL
         env:
           WEBHOOK_URL: ${{ secrets.ZAPIER_URL }}
 
