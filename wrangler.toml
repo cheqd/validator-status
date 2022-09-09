@@ -12,8 +12,6 @@ main = "src/index.ts"
 # Details: https://developers.cloudflare.com/workers/platform/compatibility-dates/
 compatibility_date = "2022-05-24"
 
-node_compat = true
-
 # Usage model for the Worker
 # Details: https://developers.cloudflare.com/workers/platform/limits
 usage_model = "bundled"
@@ -122,4 +120,4 @@ crons = ["* * * * *"]
 # minify = "false"
 
 # Add polyfills for node builtin modules and globals?
-node_compat = true
+# node_compat = true
