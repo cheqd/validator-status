@@ -1,4 +1,5 @@
-import { fetchStatuses, fetchStatusesByState } from './validators';
+import { fetchStatusesByState } from './validators';
+import { ValidatorStatusRecord } from "../types/types";
 
 export async function webhookTriggers(event: Event) {
     console.log("triggering webhooks...")
@@ -7,23 +8,28 @@ export async function webhookTriggers(event: Event) {
 
 async function sendValidatorStatuses() {
     console.log("sending degraded status alerts...")
-    const statuses = await fetchStatusesByState("degraded");
+    let filtered = new Array<ValidatorStatusRecord>();
+    for (const a of await fetchStatusesByState("active")) {
+        if (a.activeBlocks < 99) {
+            filtered.push(a)
+        }
+    }
 
-    if (statuses.length > 0) {
+    console.log(`alerting ${filtered.length} degraded validators... (${WEBHOOK_URL})`)
+
+    if (filtered.length > 0) {
         try {
             const init = {
-                body: JSON.stringify(statuses),
+                body: JSON.stringify(filtered),
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json;charset=UTF-8',
                 },
             };
 
-            console.log({WEBHOOK_URL: WEBHOOK_URL})
             const response = await fetch(WEBHOOK_URL, init);
-            console.log('Res: ', response);
         } catch (err: any) {
-            console.error(err)
+            console.log(err)
         }
     }
 }
