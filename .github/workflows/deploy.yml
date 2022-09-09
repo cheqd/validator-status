@@ -67,6 +67,7 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           wranglerVersion: '2.0.27'
           preCommands: npm ci
+          # `publish` goes to production by default
           command: publish
           secrets: |
             WEBHOOK_URL
