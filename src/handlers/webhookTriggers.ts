@@ -1,6 +1,8 @@
 import { fetchStatusesByState } from './validators';
 import { ValidatorStatusRecord } from "../types/types";
 
+let WEBHOOK_URL: any
+
 export async function webhookTriggers(event: Event) {
     console.log("triggering webhooks...")
     await sendValidatorStatuses();

@@ -103,7 +103,7 @@ async function buildStatus(validator: CosmosValidator | null, status: any): Prom
     return {
         // _: v.validatorSigningInfos,
         operatorAddress: status.validatorInfo.operatorAddress,
-        moniker: status.validatorDescriptions.moniker,
+        moniker: status.validatorDescriptions[0].moniker,
         status: s.toLowerCase(),
         explorerUrl: `https://explorer.cheqd.io/validators/${status.validatorInfo.operatorAddress}`,
         activeBlocks: parseFloat(status.validatorCondition.toFixed(2)),
