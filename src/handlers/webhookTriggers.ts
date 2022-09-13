@@ -10,7 +10,7 @@ async function sendValidatorStatuses() {
     console.log("Sending degraded status alerts...")
     let filtered = new Array<ValidatorStatusRecord>();
     for (const a of await fetchStatusesByState("active")) {
-        if (a.activeBlocks < 99) {
+        if (a.activeBlocks < parseInt(DEGRADED_THRESHOLD)) {
             filtered.push(a)
         }
     }
