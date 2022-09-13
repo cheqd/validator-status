@@ -42,7 +42,7 @@ DEGRADED_THRESHOLD = "80"
 # Details: https://developers.cloudflare.com/workers/learning/how-kv-works
 # @default `[]`
 [[kv_namespaces]]
-    binding = "validator-status-VALIDATOR_CONDITION"
+    binding = "VALIDATOR_CONDITION"
     id = "9401dc1e382e4fe7ac21d7d43eef247d"
     preview_id = "c49c872baa8c4a62990ce5cfec03413f"
 
@@ -85,7 +85,7 @@ vars = { COSMOS_API = "https://api.cheqd.net/cosmos", GRAPHQL_API = "https://gql
 # Details: https://developers.cloudflare.com/workers/learning/how-kv-works
 # @default `[]`
 [[env.staging.kv_namespaces]]
-    binding = "validator-status-staging-VALIDATOR_CONDITION"
+    binding = "VALIDATOR_CONDITION"
     id = "7e778d1c2a61419c9ab4b10b4f436255"
     preview_id = "10ff8a715c8a4730bc0c8af5500fbd87"
 
