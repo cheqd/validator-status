@@ -22,8 +22,6 @@ export async function fetchStatuses() {
         cosmosValidators.set(val.operator_address.toString(), val)
     }
 
-    // console.log(JSON.stringify(cosmosValidators.get("cheqdvaloper10n3fs6fkl4fp9dcsdfl2vl3ay7pk7snnqchj26")))
-
     let statuses: ValidatorStatusRecord[] = [];
     for (let i = 0; i < validators.length; i++) {
         let s = validators[i];

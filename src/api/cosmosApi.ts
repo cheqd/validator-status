@@ -59,7 +59,7 @@ export class CosmosClient {
             };
 
             const url = `${this.apiUrl}/staking/v1beta1/validators`;
-            console.log(`requesting validators from Cosmos api (${url})...`)
+            console.log(`Requesting validators from Cosmos api (${url})...`)
 
             const res = await fetch(url, init);
 

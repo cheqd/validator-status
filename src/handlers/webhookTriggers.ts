@@ -4,12 +4,12 @@ import { ValidatorStatusRecord } from "../types/types";
 let WEBHOOK_URL: any
 
 export async function webhookTriggers(event: Event) {
-    console.log("triggering webhooks...")
+    console.log("Triggering webhook...")
     await sendValidatorStatuses();
 }
 
 async function sendValidatorStatuses() {
-    console.log("sending degraded status alerts...")
+    console.log("Sending degraded status alerts...")
     let filtered = new Array<ValidatorStatusRecord>();
     for (const a of await fetchStatusesByState("active")) {
         if (a.activeBlocks < 99) {
@@ -17,7 +17,7 @@ async function sendValidatorStatuses() {
         }
     }
 
-    console.log(`alerting ${filtered.length} degraded validators... (${WEBHOOK_URL})`)
+    console.log(`Alerting ${filtered.length} degraded validators... (${WEBHOOK_URL})`)
 
     if (filtered.length > 0) {
         try {
