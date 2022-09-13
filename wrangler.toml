@@ -43,8 +43,8 @@ DEGRADED_THRESHOLD = "80"
 # @default `[]`
 [[kv_namespaces]]
     binding = "VALIDATOR_CONDITION"
-    id = "11bacd2d5af444b0bbd55f55e1244dff"
-    preview_id = "ed3c89fbb9144a038dac5bfec9276a6b"
+    id = "9401dc1e382e4fe7ac21d7d43eef247d"
+    preview_id = "c49c872baa8c4a62990ce5cfec03413f"
 
 [triggers]
 crons = ["0 * * * *"]
@@ -84,10 +84,10 @@ vars = { COSMOS_API = "https://api.cheqd.net/cosmos", GRAPHQL_API = "https://gql
 # KV Namespaces accessible from the Worker
 # Details: https://developers.cloudflare.com/workers/learning/how-kv-works
 # @default `[]`
-[[kv_namespaces]]
+[[env.staging.kv_namespaces]]
     binding = "VALIDATOR_CONDITION"
-    id = "4d33675ee5e44aa1b99a7e77496ca49b"
-    preview_id = "5efa4f2287cd4c058c26f1fa88c6ec6b"
+    id = "7e778d1c2a61419c9ab4b10b4f436255"
+    preview_id = "10ff8a715c8a4730bc0c8af5500fbd87"
 
 # Cron triggers for staging worker
 [env.staging.triggers]
