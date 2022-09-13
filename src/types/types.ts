@@ -7,40 +7,52 @@ export type Params = {
 }
 
 export type SlashingParams = {
-  params: Params;
+    params: Params;
 }
 
-export type ValidatorStatuses = {
+export enum ValidatorState {
+    Active,
+    Jailed,
+    Tombstoned,
+    Degraded,
+    NeverJailed,
+}
+
+export type Statuses = {
     status: number;
     jailed: boolean;
     height: number;
 }
 
-export type ValidatorSigningInfos = {
+export type SigningInfos = {
     missedBlocksCounter: number;
     tombstoned: boolean;
 }
 
-export type ValidatorDescriptions = {
+export type Descriptions = {
     moniker: string;
 }
 
-export type ValidatorInfo = {
+export type Info = {
     operatorAddress: string;
 }
 
 export type Validator = {
-    validatorStatuses: ValidatorStatuses;
-    validatorSigningInfos: ValidatorSigningInfos;
-    validatorDescriptions: ValidatorDescriptions;
-    validatorInfo: ValidatorInfo;
+    validatorStatuses: Statuses;
+    validatorSigningInfos: SigningInfos;
+    validatorDescriptions: Descriptions;
+    validatorInfo: Info;
     validatorCondition?: number;
 }
 
-export type ValidatorModified = {
-    operatorAddress: string;
-    status: number;
-    condition: number;
-    jailed?: boolean;
-    moniker: string;
-}
+export type ValidatorStatusRecord = {
+    // _: any,
+    operatorAddress: string,
+    moniker: string,
+    status: string,
+    explorerUrl: string
+    activeBlocks: number,
+    lastChecked: Date,
+    lastJailed: Date,
+    // jailedCount: number,
+};
