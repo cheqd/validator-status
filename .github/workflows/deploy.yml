@@ -30,7 +30,7 @@ jobs:
         with:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          wranglerVersion: '2.0.27'
+          wranglerVersion: '2.0.29'
           environment: "staging"
           preCommands: npm ci
           command: publish --env staging
@@ -65,7 +65,7 @@ jobs:
         with:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          wranglerVersion: '2.0.27'
+          wranglerVersion: '2.0.29'
           preCommands: npm ci
           # `publish` goes to production by default
           command: publish
