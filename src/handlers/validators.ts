@@ -5,8 +5,6 @@ import { ValidatorState, ValidatorStatusRecord } from "../types/types";
 import { getValidatorStatus } from "../helpers/validators";
 import { CosmosClient, CosmosValidator } from "../api/cosmosApi";
 
-const util = require('util')
-
 const epoch = new Date("1970-01-01T00:00:00Z");
 
 export async function fetchStatuses() {
@@ -87,18 +85,6 @@ async function buildStatus(validator: CosmosValidator | null, status: any): Prom
             lastJailed = new Date(validator.unbonding_time.toString())
         }
     }
-
-    // let jailedCount = 0
-    // if (v.lastJailed != epoch) {
-    //     let rec = await VALIDATOR_CONDITION.get(v.operatorAddress)
-    //     if (rec) {
-    //         let val: ValidatorStatusRecord = JSON.parse(rec)
-    //
-    //         // jailedCount = val.jailedCount
-    //     }
-    //
-    //     jailedCount++
-    // }
 
     return {
         // _: v.validatorSigningInfos,

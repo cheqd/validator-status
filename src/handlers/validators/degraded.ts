@@ -5,7 +5,7 @@ import { ValidatorStatusRecord } from "../../types/types";
 export async function handlerDegraded(request: Request): Promise<Response> {
     let filtered = new Array<ValidatorStatusRecord>();
     for (const a of await fetchStatusesByState("active")) {
-        if (a.activeBlocks < 99) {
+        if (a.activeBlocks < DEGRADED_THRESHOLD) {
             filtered.push(a)
         }
     }

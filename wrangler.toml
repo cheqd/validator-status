@@ -36,6 +36,7 @@ route = { pattern = "validator-status.cheqd.net/*", zone_id = "88e06eefedbbd140a
 # GraphQL API endpoint for target network. Must be sourced from a BigDipper instance.
 COSMOS_API = "https://api.cheqd.net/cosmos"
 GRAPHQL_API = "https://explorer-gql.cheqd.io/v1/graphql"
+DEGRADED_THRESHOLD = 80
 
 # KV Namespaces accessible from the Worker
 # Details: https://developers.cloudflare.com/workers/learning/how-kv-works
@@ -77,7 +78,7 @@ route = { pattern = "validator-status-staging.cheqd.net/*", zone_id = "88e06eefe
 
 # Map of environment variables to set when deploying the Worker
 # Not inherited. @default `{}`
-vars = { COSMOS_API = "https://api.cheqd.net/cosmos", GRAPHQL_API = "https://explorer-gql.cheqd.io/v1/graphql" }
+vars = { COSMOS_API = "https://api.cheqd.net/cosmos", GRAPHQL_API = "https://explorer-gql.cheqd.io/v1/graphql", DEGRADED_THRESHOLD = 99 }
 
 # KV Namespaces accessible from the Worker
 # Details: https://developers.cloudflare.com/workers/learning/how-kv-works
