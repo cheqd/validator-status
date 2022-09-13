@@ -42,7 +42,8 @@ jobs:
   production-deploy:
     name: "Cloudflare - Production"
     needs: staging-deploy
-    if: ${{ success() && ( github.ref_name == 'main' ) }}
+    # if: ${{ success() && ( github.ref_name == 'main' ) }}
+    if: ${{ success()
     runs-on: ubuntu-latest
     permissions:
       security-events: write
