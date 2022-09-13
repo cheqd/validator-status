@@ -36,7 +36,7 @@ route = { pattern = "validator-status.cheqd.net/*", zone_id = "88e06eefedbbd140a
 # GraphQL API endpoint for target network. Must be sourced from a BigDipper instance.
 COSMOS_API = "https://api.cheqd.net/cosmos"
 GRAPHQL_API = "https://gql.cheqd.io/v1/graphql"
-DEGRADED_THRESHOLD = "80"
+DEGRADED_THRESHOLD = "90"
 
 # KV Namespaces accessible from the Worker
 # Details: https://developers.cloudflare.com/workers/learning/how-kv-works
@@ -47,7 +47,7 @@ DEGRADED_THRESHOLD = "80"
     preview_id = "c49c872baa8c4a62990ce5cfec03413f"
 
 [triggers]
-crons = ["* * * * *"]
+crons = ["0 * * * *"]
 
 ###############################################################
 ###             SECTION 3: Local Development                ###
@@ -79,7 +79,7 @@ route = { pattern = "validator-status-staging.cheqd.net/*", zone_id = "88e06eefe
 
 # Map of environment variables to set when deploying the Worker
 # Not inherited. @default `{}`
-vars = { COSMOS_API = "https://api.cheqd.net/cosmos", GRAPHQL_API = "https://gql.cheqd.io/v1/graphql", DEGRADED_THRESHOLD = "99" }
+vars = { COSMOS_API = "https://api.cheqd.net/cosmos", GRAPHQL_API = "https://gql.cheqd.io/v1/graphql", DEGRADED_THRESHOLD = "98" }
 
 # KV Namespaces accessible from the Worker
 # Details: https://developers.cloudflare.com/workers/learning/how-kv-works
@@ -91,7 +91,7 @@ vars = { COSMOS_API = "https://api.cheqd.net/cosmos", GRAPHQL_API = "https://gql
 
 # Cron triggers for staging worker
 [env.staging.triggers]
-crons = ["0/15 * * * *"]
+crons = ["0/30 * * * *"]
 
 ###############################################################
 ###               OPTIONAL: Build Configuration             ###
