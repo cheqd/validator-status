@@ -16,40 +16,25 @@ The API itself can be deployed using [Cloudflare Workers](https://workers.cloudf
 
 To simplify the task of alerting via various channels (and to keep it extensible to other channels), we take the output of our validator status API and parse it via [Zapier](https://zapier.com/). This is done as a two-stage process via two separate "Zaps".
 
-### Collating a list of validators missing blocks
+Right now, our setup sends these details to the [cheqd Community Slack](http://cheqd.link/join-cheqd-slack) and the [cheqd Community Discord](http://cheqd.link/discord-github).
 
-1. [Schedule by Zapier](https://zapier.com/apps/schedule/integrations) to wake up the "Zap" every hour
-2. Run custom JavaScript code using [Code by Zapier](https://zapier.com/apps/code/integrations) to parse the JSON output. (The `80.0` figure below is the percentage of active blocks within the signed blocks window at which a validator node is considered "in trouble".)
+1. Our validator status API sends [a webhook call to a Zapier "Zap"](https://zapier.com/shared/d407b10516f89da18e35b97ce3ef226bca2ad741) that listens for newly-degraded validators every hour.
+2. Lists of degraded validators are compiled using a Zapier "Sub-Zap" to process the data from the API into a usable format and stored in a "digest".
 
 	```javascript
-	const res = await fetch(inputData.URL);
-	const body = await res.text();
-	const obj = JSON.parse(body);
-	var compromised = [];
+	const body = JSON.parse(inputData.VALIDATOR_CONDITION);
+	var degraded = [];
 
-	for (let k=0; k<obj.length; k++) {
-	if (obj[k]["jailed"] == false && obj[k]["condition"] < 80.0) {
-		compromised.push(obj[k]);
-		}
+	for (let k=0; k<body.length; k++) {
+	degraded.push(body[k]);
 	}
-	return {compromised}
+	return {degraded}
 	```
 
-3. [Filter by Zapier](https://zapier.com/apps/filter/integrations) to check if there are entries generated in the compromised validator list. If not, then terminate Zap execution.
-4. If the execution has reached this stage, [Looping by Zapier](https://zapier.com/apps/looping/integrations) with the following sub-steps:
-   1. [Formatter by Zapier](https://zapier.com/apps/formatter/integrations) to carry out text/number formatting.
-   2. [Digest by Zapier](https://zapier.com/apps/digest/integrations) to push the formatted bullet-list item with validator details into a compiled digest.
-
-### Sending an alert to designated alert channel
-
-A separate [Zap triggers and sends alerts to designated channels](https://zapier.com/shared/ff0c81e509391daa829e1aabfff6b5eec14cb0b2). Right now, our setup sends these details to the [cheqd Community Slack](http://cheqd.link/join-cheqd-slack) and the [cheqd Community Discord](http://cheqd.link/discord-github).
-
-1. Similar to above, Schedule by Zapier to wake the Zap up every hour
-2. "Release" any unreleased digests by using [the manual release feature in Digest by Zapier](https://zapier.com/help/create/storage-and-digests/compile-data-in-a-digest-in-zaps#release-the-content-of-the-digest).
-3. Filter by Zapier to check if there are any entries populated in the digest. If not, terminate execution of any further steps at this stage.
+3. "Release" any unreleased digests by using [the manual release feature in Digest by Zapier](https://zapier.com/help/create/storage-and-digests/compile-data-in-a-digest-in-zaps#release-the-content-of-the-digest).
 4. If execution has proceeded to this step, use the [Zapier App for Slack](https://zapier.com/apps/slack/integrations) and [Zapier App for Discord](https://zapier.com/apps/discord/integrations) to send a message (with formatting) to designated alert channels.
 
-You can [copy this Zap](https://zapier.com/shared/ff0c81e509391daa829e1aabfff6b5eec14cb0b2) to configure a similar setup for other alert channels, such as [SMS by Zapier](https://zapier.com/apps/sms/integrations) or [Email by Zapier](https://zapier.com/apps/email/integrations).
+You can [copy this Zap](https://zapier.com/shared/d407b10516f89da18e35b97ce3ef226bca2ad741) to configure a similar setup for other alert channels, such as [SMS by Zapier](https://zapier.com/apps/sms/integrations) or [Email by Zapier](https://zapier.com/apps/email/integrations).
 
 ## 🧑‍💻🛠 Developer Guide
 
