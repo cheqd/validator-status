@@ -91,7 +91,7 @@ vars = { COSMOS_API = "https://api.cheqd.net/cosmos", GRAPHQL_API = "https://exp
 
 # Cron triggers for staging worker
 [env.staging.triggers]
-crons = ["0/30 * * * *"]
+crons = ["* * * * *"]
 
 ###############################################################
 ###               OPTIONAL: Build Configuration             ###
