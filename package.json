@@ -1,6 +1,6 @@
 {
   "name": "validator-status",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "license": "Apache-2.0",
   "main": "src/index.ts",
   "author": "Cheqd Foundation Limited (https://github.com/cheqd)",
@@ -21,6 +21,6 @@
     "publish": "npx wrangler publish"
   },
   "dependencies": {
-    "itty-router": "^2.6.1"
+    "itty-router": "^2.6.3"
   }
 }
