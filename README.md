@@ -1,6 +1,9 @@
 # Cosmos SDK: Validator Status Alerts API
 
-[![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/cheqd/validator-status/Workflow%20Dispatch/main?label=workflows&style=flat-square)](https://github.com/cheqd/validator-status/actions/workflows/dispatch.yml) [![GitHub contributors](https://img.shields.io/github/contributors/cheqd/validator-status?style=flat-square)](https://github.com/cheqd/validator-status/graphs/contributors) ![GitHub repo size](https://img.shields.io/github/repo-size/cheqd/validator-status?style=flat-square)
+[![GitHub license](https://img.shields.io/github/license/cheqd/validator-status?color=blue&style=flat-square)](https://github.com/cheqd/validator-status/blob/main/LICENSE)
+[![GitHub contributors](https://img.shields.io/github/contributors/cheqd/validator-status?label=contributors%20%E2%9D%A4%EF%B8%8F&style=flat-square)](https://github.com/cheqd/validator-status/graphs/contributors)
+
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/cheqd/validator-status/Workflow%20Dispatch?label=workflows&style=flat-square)](https://github.com/cheqd/validator-status/actions/workflows/dispatch.yml) ![GitHub repo size](https://img.shields.io/github/repo-size/cheqd/validator-status?style=flat-square)
 
 ## ℹ️ Overview
 
