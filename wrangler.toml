@@ -47,7 +47,7 @@ DEGRADED_THRESHOLD = "90"
     preview_id = "c49c872baa8c4a62990ce5cfec03413f"
 
 [triggers]
-crons = ["0 * * * *"]
+crons = ["0 0/2 * * *"]
 
 ###############################################################
 ###             SECTION 3: Local Development                ###
@@ -91,7 +91,7 @@ vars = { COSMOS_API = "https://api.cheqd.net/cosmos", GRAPHQL_API = "https://exp
 
 # Cron triggers for staging worker
 [env.staging.triggers]
-crons = ["0 0 * * *"]
+crons = ["0 9 * * 1"]
 
 ###############################################################
 ###               OPTIONAL: Build Configuration             ###

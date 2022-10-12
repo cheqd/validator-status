@@ -14,7 +14,4 @@ jobs:
     name: "Deploy"
     needs: call-lint
     uses: ./.github/workflows/deploy.yml
-    concurrency: 
-      group: ${{ github.workflow }}
-      cancel-in-progress: false
     secrets: inherit

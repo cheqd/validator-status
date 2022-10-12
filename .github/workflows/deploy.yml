@@ -41,11 +41,8 @@ jobs:
 
   production-deploy:
     name: "Cloudflare - Production"
-    needs: staging-deploy
-    if: ${{ success() && ( github.ref_name == 'main' ) }}
+    if: ${{ github.ref_name == 'main' }}
     runs-on: ubuntu-latest
-    permissions:
-      security-events: write
     environment:
       name: production
       url: https://validator-status.cheqd.net/
