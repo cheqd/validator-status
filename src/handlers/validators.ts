@@ -1,4 +1,4 @@
-import { Request } from "itty-router";
+import { IRequest } from "itty-router";
 import { GraphQLClient } from "../helpers/graphql";
 import { BigDipperApi } from "../api/bigDipperApi";
 import { ValidatorState, ValidatorStatusRecord } from "../types/types";
