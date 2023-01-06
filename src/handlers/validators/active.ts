@@ -1,6 +1,5 @@
 import { Request } from "itty-router";
-import { fetchStatuses, fetchStatusesByState } from "../validators";
-import { Validator, ValidatorStatusRecord } from "../../types/types";
+import { fetchStatusesByState } from "../validators";
 
 export async function handlerActive(request: Request): Promise<Response> {
     const active = await fetchStatusesByState("active")

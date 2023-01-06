@@ -5,7 +5,7 @@ import { ValidatorState, ValidatorStatusRecord } from "../types/types";
 import { getValidatorStatus } from "../helpers/validators";
 import { CosmosClient, CosmosValidator } from "../api/cosmosApi";
 
-const epoch = new Date("1970-01-01T00:00:00Z");
+const epoch = new Date();
 
 export async function fetchStatuses() {
     let gql_client = new GraphQLClient(GRAPHQL_API);
@@ -87,7 +87,7 @@ async function buildStatus(validator: CosmosValidator | null, status: any): Prom
     return {
         // _: v.validatorSigningInfos,
         operatorAddress: status.validatorInfo.operatorAddress,
-        moniker: status.validatorDescriptions[0].moniker,
+        moniker: status?.validatorDescriptions?.[0]?.moniker ?? '',
         status: s.toLowerCase(),
         explorerUrl: `https://explorer.cheqd.io/validators/${status.validatorInfo.operatorAddress}`,
         activeBlocks: parseFloat(status.validatorCondition.toFixed(2)),
