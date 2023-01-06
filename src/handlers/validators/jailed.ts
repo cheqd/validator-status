@@ -1,7 +1,7 @@
-import { Request } from "itty-router";
+import { IRequest } from "itty-router";
 import { fetchStatusesByState } from "../validators";
 
-export async function handlerJailed(request: Request): Promise<Response> {
+export async function handlerJailed(request: IRequest): Promise<Response> {
     const jailed = await fetchStatusesByState("jailed")
 
     return new Response(JSON.stringify(jailed), {

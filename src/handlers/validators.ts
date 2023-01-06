@@ -1,11 +1,11 @@
-import { Request } from "itty-router";
+import { IRequest } from "itty-router";
 import { GraphQLClient } from "../helpers/graphql";
 import { BigDipperApi } from "../api/bigDipperApi";
 import { ValidatorState, ValidatorStatusRecord } from "../types/types";
 import { getValidatorStatus } from "../helpers/validators";
 import { CosmosClient, CosmosValidator } from "../api/cosmosApi";
 
-const epoch = new Date("1970-01-01T00:00:00Z");
+const epoch = new Date();
 
 export async function fetchStatuses() {
     let gql_client = new GraphQLClient(GRAPHQL_API);
@@ -85,19 +85,17 @@ async function buildStatus(validator: CosmosValidator | null, status: any): Prom
     }
 
     return {
-        // _: v.validatorSigningInfos,
         operatorAddress: status.validatorInfo.operatorAddress,
-        moniker: status.validatorDescriptions[0].moniker,
+        moniker: status?.validatorDescriptions?.[0]?.moniker ?? '',
         status: s.toLowerCase(),
         explorerUrl: `https://explorer.cheqd.io/validators/${status.validatorInfo.operatorAddress}`,
         activeBlocks: parseFloat(status.validatorCondition.toFixed(2)),
         lastChecked: new Date(),
         lastJailed: lastJailed,
-        // jailedCount: 0
     };
 }
 
-export async function handler(request: Request): Promise<Response> {
+export async function handler(request: IRequest): Promise<Response> {
     let statuses = await fetchStatuses();
 
     return new Response(JSON.stringify(statuses), {

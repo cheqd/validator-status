@@ -1,4 +1,4 @@
-import { IHTTPMethods, Request, Router } from 'itty-router'
+import { Router, RouterType } from 'itty-router'
 import { handler as validators } from './handlers/validators';
 import { handlerActive } from "./handlers/validators/active";
 import { handlerJailed } from "./handlers/validators/jailed";
@@ -12,12 +12,12 @@ addEventListener('scheduled', (event: any) => {
 })
 
 addEventListener('fetch', (event: any) => {
-    const router = Router<Request, IHTTPMethods>()
+    const router = Router()
     registerRoutes(router);
     event.respondWith(router.handle(event.request).catch(handleError))
 })
 
-function registerRoutes(router: Router) {
+function registerRoutes(router: RouterType) {
     router.get('/', validators);
     router.get('/active', handlerActive);
     router.get('/jailed', handlerJailed);
