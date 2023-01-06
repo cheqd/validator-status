@@ -85,7 +85,6 @@ async function buildStatus(validator: CosmosValidator | null, status: any): Prom
     }
 
     return {
-        // _: v.validatorSigningInfos,
         operatorAddress: status.validatorInfo.operatorAddress,
         moniker: status?.validatorDescriptions?.[0]?.moniker ?? '',
         status: s.toLowerCase(),
@@ -93,11 +92,10 @@ async function buildStatus(validator: CosmosValidator | null, status: any): Prom
         activeBlocks: parseFloat(status.validatorCondition.toFixed(2)),
         lastChecked: new Date(),
         lastJailed: lastJailed,
-        // jailedCount: 0
     };
 }
 
-export async function handler(request: Request): Promise<Response> {
+export async function handler(request: IRequest): Promise<Response> {
     let statuses = await fetchStatuses();
 
     return new Response(JSON.stringify(statuses), {
