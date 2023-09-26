@@ -37,7 +37,7 @@ Right now, our setup sends these details to the [cheqd Community Slack](http://c
 3. "Release" any unreleased digests by using [the manual release feature in Digest by Zapier](https://zapier.com/help/create/storage-and-digests/compile-data-in-a-digest-in-zaps#release-the-content-of-the-digest).
 4. If execution has proceeded to this step, use the [Zapier App for Slack](https://zapier.com/apps/slack/integrations) and [Zapier App for Discord](https://zapier.com/apps/discord/integrations) to send a message (with formatting) to designated alert channels.
 
-You can [copy this Zap](https://zapier.com/shared/d407b10516f89da18e35b97ce3ef226bca2ad741) to configure a similar setup for other alert channels, such as [SMS by Zapier](https://zapier.com/apps/sms/integrations) or [Email by Zapier](https://zapier.com/apps/email/integrations).
+You can [copy this Zap](https://zapier.com/shared/d407b10516f89da18e35b97ce3ef226bca2ad741) to configure a similar setup for other alert channels, such as [Email by Zapier](https://zapier.com/apps/email/integrations).
 
 ## 🧑‍💻🛠 Developer Guide
 
