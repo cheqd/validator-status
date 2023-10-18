@@ -10,10 +10,10 @@
   },
   "homepage": "https://github.com/cheqd/validator-status#readme",
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20230922.0",
-    "@types/node": "^20.7.0",
+    "@cloudflare/workers-types": "^4.20231016.0",
+    "@types/node": "^20.8.6",
     "typescript": "^4.9.5",
-    "wrangler": "^3.9.1"
+    "wrangler": "^3.13.2"
   },
   "private": true,
   "scripts": {
