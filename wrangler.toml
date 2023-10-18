@@ -46,7 +46,7 @@ DEGRADED_THRESHOLD = "90"
     id = "9401dc1e382e4fe7ac21d7d43eef247d"
 
 [triggers]
-crons = ["0 0/2 * * *"]
+crons = ["0 0/4 * * *"]
 
 ###############################################################
 ###             SECTION 3: Local Development                ###
