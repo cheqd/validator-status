@@ -9,18 +9,30 @@
     "url": "https://github.com/cheqd/validator-status/issues"
   },
   "homepage": "https://github.com/cheqd/validator-status#readme",
-  "devDependencies": {
-    "@cloudflare/workers-types": "^4.20231016.0",
-    "@types/node": "^20.8.6",
-    "typescript": "^4.9.5",
-    "wrangler": "^3.13.2"
-  },
   "private": true,
   "scripts": {
     "start": "npx wrangler dev",
-    "publish": "npx wrangler publish"
+    "publish": "npx wrangler publish",
+    "format": "prettier --write 'src/**/*.{js,ts,cjs,mjs}'",
+    "lint": "eslint --max-warnings=0 src && prettier --check '*.{json,js}' 'src/**/*.{js,ts}' 'test/**/*.{js,ts}'"
   },
   "dependencies": {
     "itty-router": "^4.0.23"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20231016.0",
+    "@types/node": "^20.8.6",
+    "@typescript-eslint/eslint-plugin": "^6.8.0",
+    "@typescript-eslint/parser": "^6.8.0",
+    "eslint": "^8.51.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-config-typescript": "^3.0.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "prettier": "^3.0.3",
+    "typescript": "^4.9.5",
+    "wrangler": "^3.13.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
