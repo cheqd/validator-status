@@ -19,14 +19,14 @@ jobs:
         with:
           persist-credentials: false
 
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version: 18
           cache: 'npm'
           cache-dependency-path: '**/package-lock.json'
 
       - name: Publish to Cloudflare
-        uses: cloudflare/wrangler-action@v3.3.1
+        uses: cloudflare/wrangler-action@v3
         with:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -37,7 +37,7 @@ jobs:
           secrets: |
             WEBHOOK_URL
         env:
-          WEBHOOK_URL: ${{ secrets.ZAPIER_URL }}
+          WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
 
   production-deploy:
     name: "Cloudflare - Production"
@@ -51,14 +51,14 @@ jobs:
         with:
           persist-credentials: false
 
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version: 18
           cache: 'npm'
           cache-dependency-path: '**/package-lock.json'
 
       - name: Publish to Cloudflare
-        uses: cloudflare/wrangler-action@v3.3.1
+        uses: cloudflare/wrangler-action@v3
         with:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -69,4 +69,4 @@ jobs:
           secrets: |
             WEBHOOK_URL
         env:
-          WEBHOOK_URL: ${{ secrets.ZAPIER_URL }}
+          WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
