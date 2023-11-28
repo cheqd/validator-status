@@ -37,7 +37,7 @@ jobs:
           secrets: |
             WEBHOOK_URL
         env:
-          WEBHOOK_URL: ${{ secrets.ZAPIER_URL }}
+          WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
 
   production-deploy:
     name: "Cloudflare - Production"
@@ -69,4 +69,4 @@ jobs:
           secrets: |
             WEBHOOK_URL
         env:
-          WEBHOOK_URL: ${{ secrets.ZAPIER_URL }}
+          WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
