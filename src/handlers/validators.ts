@@ -93,7 +93,7 @@ async function buildStatus(validator: CosmosValidator | null, status: any): Prom
 		operatorAddress: status.validatorInfo.operatorAddress,
 		moniker: status?.validatorDescriptions?.[0]?.moniker ?? '',
 		status: s.toLowerCase(),
-		explorerUrl: `https://bigdipper.live/cheqd/validators/${status.validatorInfo.operatorAddress}`,
+		explorerUrl: `https://explorer.cheqd.io/validators/${status.validatorInfo.operatorAddress}`,
 		activeBlocks: parseFloat(status.validatorCondition.toFixed(2)),
 		lastChecked: new Date(),
 		lastJailed: lastJailed,
