@@ -2,6 +2,7 @@
 wrangler.dev.toml
 watchlist.json
 watchlist-old.json
+.wrangler
 
 ### GENERAL EXCLUSIONS ###
 
