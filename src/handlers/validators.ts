@@ -26,9 +26,12 @@ export async function fetchStatuses() {
 	for (let i = 0; i < validators.length; i++) {
 		let s = validators[i];
 		let addr = s.operatorAddress;
-		let missed_blocks_counter = s.validatorSigningInfos[0].missedBlocksCounter;
-		s.validatorCondition = (1 - missed_blocks_counter / signed_blocks_window) * 100;
-
+		if (s.validatorSigningInfos[0]) { // if validatorSigningInfos is defined
+			let missed_blocks_counter = s.validatorSigningInfos[0].missedBlocksCounter;
+			s.validatorCondition = (1 - missed_blocks_counter / signed_blocks_window) * 100;
+		} else {
+			s.validatorCondition = 0.0;
+		}
 		if (
 			Object.keys(validators[i].validatorSigningInfos).length !== 0 &&
 			Object.keys(validators[i].validatorStatuses).length !== 0

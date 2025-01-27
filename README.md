@@ -63,7 +63,7 @@ While our deployment uses Cloudflare Wrangler, the application itself could be m
 
 ### Configuration
 
-Wrangler CLI uses [`wrangler.toml` for configuring](https://developers.cloudflare.com/workers/wrangler/configuration/) the application. If you're using this for your own purposes, you will need to replace values for `account_id`, `route`, etc. for the application to work correctly along with your own [Cloudflare API tokens](https://developers.cloudflare.com/api/tokens/create).
+Wrangler CLI uses [`wrangler.toml` for configuring](https://developers.cloudflare.com/workers/wrangler/configuration/) the application. If you're using this for your own purposes, you will need to replace values for `account_id`, `route`, etc. for the application to work correctly along with your own [Cloudflare API tokens](https://developers.cloudflare.com/api/resources/accounts/subresources/tokens/methods/create/).
 
 Crucially, you must provide a publicly-accessible BigDipper GraphQL endpoint using the environment variable `GRAPHQL_API` in the `wrangler.toml` file.
 
